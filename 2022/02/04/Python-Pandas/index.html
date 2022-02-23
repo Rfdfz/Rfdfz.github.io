@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icons8-pixel-star-96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icons8-pixel-star-48.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+  <meta name="description" content="Python Data Analysis Library 或 pandas 是基于NumPy 的一种工具，该工具是为了解决数据分析任务而创建的。Pandas纳入了大量库和一些标准的数据模型，提供了高效地操作大型数据集所需地工具。Pandas提供了大量是我们快速便捷地处理数据的函数和方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python-Pandas">
+<meta property="og:url" content="http://example.com/2022/02/04/Python-Pandas/index.html">
+<meta property="og:site_name" content="Please Lamp The Star">
+<meta property="og:description" content="Python Data Analysis Library 或 pandas 是基于NumPy 的一种工具，该工具是为了解决数据分析任务而创建的。Pandas纳入了大量库和一些标准的数据模型，提供了高效地操作大型数据集所需地工具。Pandas提供了大量是我们快速便捷地处理数据的函数和方法。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-04T06:57:08.000Z">
+<meta property="article:modified_time" content="2022-02-07T08:28:39.117Z">
+<meta property="article:author" content="林程星">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/02/04/Python-Pandas/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Python-Pandas | Please Lamp The Star</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Please Lamp The Star</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/04/Python-Pandas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林程星">
+      <meta itemprop="description" content="‘绳’和‘棒’一样，是人类最早创造的工具之一。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Please Lamp The Star">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python-Pandas
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-04 14:57:08" itemprop="dateCreated datePublished" datetime="2022-02-04T14:57:08+08:00">2022-02-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-02-07 16:28:39" itemprop="dateModified" datetime="2022-02-07T16:28:39+08:00">2022-02-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>19k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>17 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Python Data Analysis Library 或 pandas 是基于NumPy 的一种工具，该工具是为了解决数据分析任务而创建的。Pandas纳入了大量库和一些标准的数据模型，提供了高效地操作大型数据集所需地工具。Pandas提供了大量是我们快速便捷地处理数据的函数和方法。</p>
+<span id="more"></span>
+<h1 id="Pandas"><a href="#Pandas" class="headerlink" title="Pandas"></a>Pandas</h1><p><strong>导入pandas包和numpy包</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br></pre></td></tr></table></figure>
+<p><strong>注：以下代码均在numpy包和pandas包已被导入的情况下运行</strong></p>
+<h2 id="Pandas的基本数据结构"><a href="#Pandas的基本数据结构" class="headerlink" title="Pandas的基本数据结构"></a>Pandas的基本数据结构</h2><ul>
+<li>Series<ul>
+<li>一维数组，与Numpy中的一维array和Python中的List相近。Series能<strong>保存不同种数据类型</strong></li>
+</ul>
+</li>
+<li>DataFrame<ul>
+<li>二维的表格型数据结构。很多功能与R语言中的data.frame类似。可以将DataFrame理解为Series的容器。以下的内容主要以DataFrame为主</li>
+</ul>
+</li>
+</ul>
+<h3 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h3><p>一维 Series 可以用一维列表初始化：</p>
+<p>默认情况下， Series 的下标都是数字（可以使用额外参数指定），类型是统一的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">a = pd.Series([<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="string">&quot;我爱你&quot;</span>])</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="string">&quot;&quot;&quot; </span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">0      1</span></span><br><span class="line"><span class="string">1      3</span></span><br><span class="line"><span class="string">2      5</span></span><br><span class="line"><span class="string">3      7</span></span><br><span class="line"><span class="string">4      9</span></span><br><span class="line"><span class="string">5    我爱你</span></span><br><span class="line"><span class="string">dtype: object</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">b = pd.Series([<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>], index=[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span>(b)</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">a    1</span></span><br><span class="line"><span class="string">b    3</span></span><br><span class="line"><span class="string">c    5</span></span><br><span class="line"><span class="string">dtype: int64</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>索引的查看：</strong><code>a.index</code></p>
+<p><strong>值的查看：</strong><code>a.values</code> or <code>a[index]</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = pd.Series([<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="string">&quot;我爱你&quot;</span>])</span><br><span class="line"><span class="built_in">print</span>(a.index, a.values)</span><br><span class="line"><span class="comment"># 输出结果为 RangeIndex(start=0, stop=6, step=1) [1 3 5 7 9 &#x27;我爱你&#x27;]</span></span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">0</span>])</span><br><span class="line"><span class="comment"># 输出结果为 1</span></span><br></pre></td></tr></table></figure>
+<p>Series 也支持<strong>切片操作</strong></p>
+<p><strong>索引赋值</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">a = pd.Series([<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="string">&quot;我爱你&quot;</span>])</span><br><span class="line">s.index.name = <span class="string">&#x27;索引&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(s)</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为:</span></span><br><span class="line"><span class="string">索引</span></span><br><span class="line"><span class="string">0      1</span></span><br><span class="line"><span class="string">1      3</span></span><br><span class="line"><span class="string">2      5</span></span><br><span class="line"><span class="string">3      7</span></span><br><span class="line"><span class="string">4      9</span></span><br><span class="line"><span class="string">5    我爱你</span></span><br><span class="line"><span class="string">dtype: object</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>若索引是数字：切片时是左闭右开的区间</strong></p>
+<p><strong>若索引不是数字：切片时是闭区间</strong></p>
+<h3 id="DataFrame"><a href="#DataFrame" class="headerlink" title="DataFrame"></a>DataFrame</h3><h4 id="DataFrame的创建"><a href="#DataFrame的创建" class="headerlink" title="DataFrame的创建"></a>DataFrame的创建</h4><p>DataFrame 是一个二维结构，这里先构造一组时间序列，作为我们第一位的下标：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">date = pd.date_range(<span class="string">&#x27;20220204&#x27;</span>, periods=<span class="number">6</span>)</span><br><span class="line"><span class="built_in">print</span>(date)</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">DatetimeIndex([&#x27;2022-02-04&#x27;, &#x27;2022-02-05&#x27;, &#x27;2022-02-06&#x27;, &#x27;2022-02-07&#x27;, &#x27;2022-02-08&#x27;, &#x27;2022-02-09&#x27;], dtype=&#x27;datetime64[ns]&#x27;, freq=&#x27;D&#x27;)</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>然后创建一个 DataFrame 结构：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame(np.random.randn(<span class="number">6</span>, <span class="number">4</span>), index=date, columns=<span class="built_in">list</span>(<span class="string">&quot;ABCD&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(df)</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">                   A         B         C         D</span></span><br><span class="line"><span class="string">2022-02-04  0.118815  2.127559 -0.162152  0.214654</span></span><br><span class="line"><span class="string">2022-02-05  0.056074 -1.220306  0.412831 -0.944796</span></span><br><span class="line"><span class="string">2022-02-06  1.439970 -1.697605 -0.830825  0.359516</span></span><br><span class="line"><span class="string">2022-02-07 -0.449522 -1.755180 -0.616983  0.009182</span></span><br><span class="line"><span class="string">2022-02-08  0.099963 -0.601037 -0.704445  0.317642</span></span><br><span class="line"><span class="string">2022-02-09 -0.839585 -0.972678  1.507569  1.082929</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>默认情况下，如果不指定 index 参数和 columns，那么他们的值将用从 0 开始的数字替代。</p>
+<p>除了向 DataFrame 中<strong>传入二维数组</strong>，我们也可以<strong>使用字典传入数据</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">dff = pd.DataFrame(&#123;<span class="string">&#x27;A&#x27;</span>: <span class="number">1.0</span>, <span class="string">&#x27;B&#x27;</span>, pd.Timestamp(<span class="string">&#x27;20220201&#x27;</span>), <span class="string">&#x27;C&#x27;</span>: pd.Series(<span class="number">1</span>, index=<span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">4</span>)), dtype=<span class="built_in">float</span>), <span class="string">&#x27;D&#x27;</span>: np.array([<span class="number">3</span>] * <span class="number">4</span>, dtype=<span class="built_in">int</span>), <span class="string">&#x27;E&#x27;</span>: pd.Categorical([<span class="string">&quot;test&quot;</span>, <span class="string">&quot;train&quot;</span>, <span class="string">&quot;test&quot;</span>, <span class="string">&quot;train&quot;</span>]), <span class="string">&#x27;F&#x27;</span>: <span class="string">&quot;abc&quot;</span>&#125;)</span><br><span class="line"><span class="built_in">print</span>(dff)</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">     A          B    C  D      E    F</span></span><br><span class="line"><span class="string">0  1.0 2022-02-01  1.0  3   test  abc</span></span><br><span class="line"><span class="string">1  1.0 2022-02-01  1.0  3  train  abc</span></span><br><span class="line"><span class="string">2  1.0 2022-02-01  1.0  3   test  abc</span></span><br><span class="line"><span class="string">3  1.0 2022-02-01  1.0  3  train  abc</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>字典的每一个 key 代表一个列，其 value 可以是各种能够转化为 Series 的对象</p>
+<p>与 Series 要求所有的类型都一致不同，DataFrame 只要求每一列数据的格式相同</p>
+<h4 id="DataFrame数据的查看"><a href="#DataFrame数据的查看" class="headerlink" title="DataFrame数据的查看"></a>DataFrame数据的查看</h4><p><strong>查看头尾数据：</strong></p>
+<p>head 和 tail 方法可以分别查看最前面几行和最后几行的数据（默认为5）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">date = pd.date_range(<span class="string">&#x27;20220204&#x27;</span>, periods=<span class="number">6</span>)</span><br><span class="line">df = pd.DataFrame(np.random.randn(<span class="number">6</span>, <span class="number">4</span>), index=date, columns=<span class="built_in">list</span>(<span class="string">&quot;ABCD&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(df.head(<span class="number">2</span>))</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">                   A         B         C         D</span></span><br><span class="line"><span class="string">2022-02-04 -2.002249 -1.154030  0.758564  0.880964</span></span><br><span class="line"><span class="string">2022-02-05 -0.999196 -0.366701  1.754099 -1.844765 </span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="built_in">print</span>(df.tail(<span class="number">3</span>))</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">                   A         B         C         D</span></span><br><span class="line"><span class="string">2022-02-07  0.175207 -0.834441 -1.297547 -1.502673</span></span><br><span class="line"><span class="string">2022-02-08 -1.152356  0.648492  0.285219  0.668402</span></span><br><span class="line"><span class="string">2022-02-09  0.162875  0.478492 -1.462482  0.353956</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>下标，列标，数据的查看：</strong></p>
+<p>下标使用index属性查看</p>
+<p>列标使用columns属性查看</p>
+<p>数据使用values属性查看</p>
+<h2 id="Pandas的数据读取及数据操作"><a href="#Pandas的数据读取及数据操作" class="headerlink" title="Pandas的数据读取及数据操作"></a>Pandas的数据读取及数据操作</h2><h3 id="数据读取"><a href="#数据读取" class="headerlink" title="数据读取"></a>数据读取</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_文件类型(<span class="string">&quot;文件相对路径或绝对路径&quot;</span>)</span><br><span class="line"><span class="comment"># 其中文件类型为excel、csv等……</span></span><br></pre></td></tr></table></figure>
+<h3 id="数据操作"><a href="#数据操作" class="headerlink" title="数据操作"></a>数据操作</h3><h4 id="行操作"><a href="#行操作" class="headerlink" title="行操作"></a>行操作</h4><p><strong>访问一行</strong></p>
+<p><strong><code>iloc(index)</code>：</strong>利用index的具体位置来获取想要的行（或列）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#df.iloc[index]</span></span><br><span class="line"><span class="comment"># 显示索引值为index行的数据</span></span><br><span class="line"><span class="comment"># 可以使用切片（切片是左闭右开区间）</span></span><br><span class="line">df.iloc[<span class="number">0</span>]</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">名字                         肖申克的救赎</span></span><br><span class="line"><span class="string">投票人数                     692795.0</span></span><br><span class="line"><span class="string">类型                          剧情/犯罪</span></span><br><span class="line"><span class="string">产地                             美国</span></span><br><span class="line"><span class="string">上映时间          1994-09-10 00:00:00</span></span><br><span class="line"><span class="string">时长                            142</span></span><br><span class="line"><span class="string">年代                           1994</span></span><br><span class="line"><span class="string">评分                            9.6</span></span><br><span class="line"><span class="string">首映地点                       多伦多电影节</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong><code>loc(index)</code>：</strong>利用index的名称来获取想要获取的行（或列）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(df.loc[index])</span><br><span class="line"><span class="comment"># 显示索引值为index行的数据</span></span><br><span class="line"><span class="comment"># 可以使用切片（切片是闭区间）</span></span><br><span class="line"><span class="built_in">print</span>(df.loc[<span class="number">0</span>:<span class="number">5</span>])</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">      名字      投票人数        类型  ...   时长    年代   评分    首映地点</span></span><br><span class="line"><span class="string">0  肖申克的救赎  692795.0     剧情/犯罪  ...  142  1994  9.6  多伦多电影节</span></span><br><span class="line"><span class="string">1    控方证人   42995.0  剧情/悬疑/犯罪  ...  116  1957  9.5      美国</span></span><br><span class="line"><span class="string">2   美丽人生   327855.0  剧情/喜剧/爱情  ...  116  1997  9.5     意大利</span></span><br><span class="line"><span class="string">3    阿甘正传  580897.0     剧情/爱情  ...  142  1994  9.4   洛杉矶首映</span></span><br><span class="line"><span class="string">4    霸王别姬  478523.0  剧情/爱情/同性  ...  171  1993  9.4      香港</span></span><br><span class="line"><span class="string">5  泰坦尼克号   157074.0  剧情/爱情/灾难  ...  194  2012  9.4    中国大陆</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>添加一行</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.</span></span><br><span class="line"><span class="comment"># 在未来的pandas版本中，append()即将被concat()替代</span></span><br><span class="line">dit = &#123;<span class="string">&#x27;名字&#x27;</span>: <span class="string">&#x27;复仇者联盟3&#x27;</span>, <span class="string">&#x27;投票人数&#x27;</span>: <span class="number">61561.0</span>, <span class="string">&#x27;类型&#x27;</span>: <span class="string">&quot;剧情&quot;</span>, <span class="string">&#x27;产地&#x27;</span>: <span class="string">&#x27;美国&#x27;</span>, <span class="string">&#x27;上映时间&#x27;</span>: pd.Timestamp(<span class="string">&quot;20180427&quot;</span>), <span class="string">&#x27;时长&#x27;</span>: <span class="number">147</span>, <span class="string">&#x27;年代&#x27;</span>: <span class="number">2018</span>, <span class="string">&#x27;评分&#x27;</span>: <span class="number">8.0</span>, <span class="string">&#x27;首映地点&#x27;</span>: <span class="string">&#x27;美国&#x27;</span>&#125;</span><br><span class="line">s = pd.Series(dit)</span><br><span class="line">s.name = <span class="number">38738</span></span><br><span class="line">df = df.append(s)</span><br><span class="line"><span class="comment"># append()方法采用复制机制</span></span><br><span class="line"><span class="built_in">print</span>(df.iloc[-<span class="number">1</span>])</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">名字                   复仇者联盟3</span></span><br><span class="line"><span class="string">投票人数                61561.0</span></span><br><span class="line"><span class="string">类型                       剧情</span></span><br><span class="line"><span class="string">产地                       美国</span></span><br><span class="line"><span class="string">上映时间    2018-04-27 00:00:00</span></span><br><span class="line"><span class="string">时长                      147</span></span><br><span class="line"><span class="string">年代                     2018</span></span><br><span class="line"><span class="string">评分                      8.0</span></span><br><span class="line"><span class="string">首映地点                     美国</span></span><br><span class="line"><span class="string">Name: 38738.0, dtype: object</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>删除一行</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df = df.drop([index])</span><br><span class="line"><span class="comment"># 删除指定行</span></span><br><span class="line"><span class="comment"># drop()方法采用复制机制</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = df.drop(name)</span><br><span class="line"><span class="comment"># name为行索引</span></span><br></pre></td></tr></table></figure>
+<h4 id="列操作"><a href="#列操作" class="headerlink" title="列操作"></a>列操作</h4><p><strong>访问一列</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df.columns				<span class="comment"># 返回的是列索引</span></span><br><span class="line">df[index][:] 			<span class="comment"># 第一个方括号是列索引，第二个方括号是行索引</span></span><br><span class="line">df[[index1, index2]][:] <span class="comment"># 访问多列</span></span><br></pre></td></tr></table></figure>
+<p><strong>增加一列</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;序号&#x27;</span>] = <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(df)+<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(df[:<span class="number">5</span>])</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">       名字      投票人数        类型    产地  ...    年代   评分    首映地点  序号</span></span><br><span class="line"><span class="string">0  肖申克的救赎  692795.0     剧情/犯罪    美国  ...  1994  9.6  多伦多电影节   1</span></span><br><span class="line"><span class="string">1    控方证人   42995.0  剧情/悬疑/犯罪    美国  ...  1957  9.5      美国   2</span></span><br><span class="line"><span class="string">2   美丽人生   327855.0  剧情/喜剧/爱情   意大利  ...  1997  9.5     意大利   3</span></span><br><span class="line"><span class="string">3    阿甘正传  580897.0     剧情/爱情    美国  ...  1994  9.4   洛杉矶首映   4</span></span><br><span class="line"><span class="string">4    霸王别姬  478523.0  剧情/爱情/同性  中国大陆  ...  1993  9.4      香港   5</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>删除一列</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = df.drop(index, axis=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 用axis=1来指定删除的是列而不是行</span></span><br></pre></td></tr></table></figure>
+<p><strong>通过标签选择数据</strong></p>
+<p><code>df.loc[[index], [colunm]]</code>通过标签选择数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(df.loc[<span class="number">1</span>, <span class="string">&#x27;名字&#x27;</span>])</span><br><span class="line"><span class="comment"># 输出结果为 &quot;控方证人&quot;</span></span><br></pre></td></tr></table></figure>
+<h4 id="条件选择"><a href="#条件选择" class="headerlink" title="条件选择"></a>条件选择</h4><p><strong>选取产地为美国的所有电影</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[[<span class="string">&quot;产地&quot;</span>] == <span class="string">&quot;美国&quot;</span>]</span><br></pre></td></tr></table></figure>
+<p><strong>选取产地为美国的所有电影，并且评分大于9分的电影</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[(df[<span class="string">&quot;产地&quot;</span>] == <span class="string">&quot;美国&quot;</span>) &amp; (df[<span class="string">&#x27;评分&#x27;</span>] &gt;= <span class="number">9.0</span>)]</span><br></pre></td></tr></table></figure>
+<p><strong>选取产地为美国或中国大陆的所有电影，并且评分大于9分</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[((df.产地 == <span class="string">&quot;美国&quot;</span>) | (df.产地 == <span class="string">&quot;中国大陆&quot;</span>)) &amp; (df[<span class="string">&#x27;评分&#x27;</span>] &gt;= <span class="number">9.0</span>)]</span><br></pre></td></tr></table></figure>
+<h3 id="缺失值及异常值处理"><a href="#缺失值及异常值处理" class="headerlink" title="缺失值及异常值处理"></a>缺失值及异常值处理</h3><h4 id="缺失值的处理方法"><a href="#缺失值的处理方法" class="headerlink" title="缺失值的处理方法"></a>缺失值的处理方法</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dropna</td>
+<td>根据标签中的缺失值进行过滤，删除缺失值</td>
+</tr>
+<tr>
+<td>fillna</td>
+<td>对缺失值进行填充</td>
+</tr>
+<tr>
+<td>isnull</td>
+<td>返回一个布尔值对象，判断哪些值是缺失值</td>
+</tr>
+<tr>
+<td>notnull</td>
+<td>isnull的否定式</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h5 id="判断缺失值"><a href="#判断缺失值" class="headerlink" title="判断缺失值"></a>判断缺失值</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&quot;名字&quot;</span>].isnull()</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">0        False</span></span><br><span class="line"><span class="string">1        False</span></span><br><span class="line"><span class="string">2        False</span></span><br><span class="line"><span class="string">3        False</span></span><br><span class="line"><span class="string">4        False</span></span><br><span class="line"><span class="string">         ...  </span></span><br><span class="line"><span class="string">38733    False</span></span><br><span class="line"><span class="string">38734    False</span></span><br><span class="line"><span class="string">38735    False</span></span><br><span class="line"><span class="string">38736    False</span></span><br><span class="line"><span class="string">38737    False</span></span><br><span class="line"><span class="string">Name: 名字, Length: 38738, dtype: bool</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<h5 id="填充缺失值"><a href="#填充缺失值" class="headerlink" title="填充缺失值"></a>填充缺失值</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&quot;评分&quot;</span>].fillna(np.mean(df[<span class="string">&quot;评分&quot;</span>]), inplace=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="删除缺失值"><a href="#删除缺失值" class="headerlink" title="删除缺失值"></a>删除缺失值</h5><p><code>df.dropna()</code>参数：</p>
+<p><code>how=&#39;all&#39;</code>：删除全为空值的行或列</p>
+<p><code>inplace=True</code>：覆盖之前的数据</p>
+<p><code>axis=0</code>：选择行或列</p>
+<h4 id="异常值的处理方法"><a href="#异常值的处理方法" class="headerlink" title="异常值的处理方法"></a>异常值的处理方法</h4><p>异常值，即在数据集中存在不合理的值，又称为离群点</p>
+<p>比如年龄为-1，笔记本电脑重量为1吨，都是异常值</p>
+<p><strong>对于异常值。一般来说数量比较少，在不影响整体数据分布的情况下，直接删除掉就可以了</strong></p>
+<p><strong>其他属性的异常值处理，请跳转到格式转换部分，进一步讨论</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = df[df[<span class="string">&quot;投票人数&quot;</span>] &gt; <span class="number">0</span>]</span><br><span class="line">df = df[df[<span class="string">&quot;投票人数&quot;</span>] % <span class="number">1</span> == <span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="数据保存"><a href="#数据保存" class="headerlink" title="数据保存"></a>数据保存</h3><p><strong>数据处理之后，然后将数据重新保存到文件中</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.to_文件类型(<span class="string">&quot;文件名&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="数据格式转换"><a href="#数据格式转换" class="headerlink" title="数据格式转换"></a>数据格式转换</h3><p>在做数据分析时，原始数据往往会因为各种各样的原因产生各种数据格式的问题。数据格式是我们非常需要注意的一点，数据格式错误往往会造成很严重的后果。并且，很多异常值也是我们经过格式转换之后才会发现，对我们规整数据，清洗数据有着重要作用。</p>
+<p><strong>查看格式</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;投票人数&#x27;</span>].dtype</span><br><span class="line"><span class="comment"># 输出结果为 dtype(&#x27;float64&#x27;)</span></span><br></pre></td></tr></table></figure>
+<p><strong>格式转换</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;投票人数&#x27;</span>] = df[<span class="string">&#x27;投票人数&#x27;</span>].astype(<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>将年份转换为整数格式</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;年代&#x27;</span>] = df[<span class="string">&#x27;年代&#x27;</span>].astype(<span class="string">&#x27;int&#x27;</span>)</span><br><span class="line"><span class="comment"># 报错，意味着存在异常值</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(df[df[<span class="string">&#x27;年代&#x27;</span>] == <span class="string">&#x27;2008\u200e&#x27;</span>])</span><br><span class="line"><span class="comment"># 发现15205号电影的年代格式不统一</span></span><br><span class="line">df.loc[<span class="number">15205</span>, <span class="string">&quot;年代&quot;</span>] = <span class="number">2008</span></span><br><span class="line"><span class="comment"># 修改年代格式</span></span><br><span class="line">df[<span class="string">&quot;年代&quot;</span>] = df[<span class="string">&quot;年代&quot;</span>].astype(<span class="string">&#x27;int&#x27;</span>)</span><br><span class="line"><span class="comment"># 转化将DataFrame里的年代数据转换为整数格式</span></span><br></pre></td></tr></table></figure>
+<h3 id="数据排序"><a href="#数据排序" class="headerlink" title="数据排序"></a>数据排序</h3><p><strong>按照投票人数进行排序</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">df.sort_values(by=<span class="string">&quot;投票人数&quot;</span>, ascending=<span class="literal">False</span>)</span><br><span class="line"><span class="comment"># ascending为&quot;是否开启升序排序&quot;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">          名字      投票人数              类型  产地  ...   时长    年代   评分    首映地点</span></span><br><span class="line"><span class="string">0     肖申克的救赎  692795.0           剧情/犯罪  美国  ...  142  1994  9.6  多伦多电影节</span></span><br><span class="line"><span class="string">9   这个杀手不太冷   662552.0        剧情/动作/犯罪  法国  ...  133  1994  9.4      法国</span></span><br><span class="line"><span class="string">22      盗梦空间  642134.0  剧情/动作/科幻/悬疑/冒险  美国  ...  148  2010  9.2    中国大陆</span></span><br><span class="line"><span class="string">3       阿甘正传  580897.0           剧情/爱情  美国  ...  142  1994  9.4   洛杉矶首映</span></span><br><span class="line"><span class="string">99   三傻大闹宝莱坞  549808.0     剧情/喜剧/爱情/歌舞  印度  ...  171  2009  9.1    中国大陆</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>先按照评分，再按照投票人数排序</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">df.sort_values(by=[<span class="string">&quot;评分&quot;</span>, <span class="string">&quot;投票人数&quot;</span>]， ascending=<span class="literal">False</span>)</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">                     名字   投票人数      类型    产地  ...  时长     年代   评分  首映地点</span></span><br><span class="line"><span class="string">9278           平安结祈 平安結  208.0      音乐    日本  ...  60   2012  9.9    美国</span></span><br><span class="line"><span class="string">13882               武之舞  128.0     纪录片  中国大陆  ...  60  34943  9.9    美国</span></span><br><span class="line"><span class="string">1110                NaN   76.0  科幻/纪录片    美国  ...  75   2001  9.9    美国</span></span><br><span class="line"><span class="string">23559          未作回答的问题  61.0     纪录片    美国  ...  60   1973  9.9    美国</span></span><br><span class="line"><span class="string">35470               NaN   46.0  纪录片/音乐    韩国  ...  90   2013  9.9    韩国</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="基本统计分析"><a href="#基本统计分析" class="headerlink" title="基本统计分析"></a>基本统计分析</h3><ol>
+<li>描述性统计</li>
+</ol>
+<p><strong><code>dataframe.describe()</code>：</strong>对dataframe中的数值型数据进行描述性统计</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(df.describe())</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">             投票人数               评分</span></span><br><span class="line"><span class="string">count   38738.000000      38738.000000</span></span><br><span class="line"><span class="string">mean     6185.833702          6.935704</span></span><br><span class="line"><span class="string">std     26143.518786          1.270101</span></span><br><span class="line"><span class="string">min      -118.000000          2.000000</span></span><br><span class="line"><span class="string">25%        98.000000          6.300000</span></span><br><span class="line"><span class="string">50%       341.000000          7.100000</span></span><br><span class="line"><span class="string">75%      1739.750000          7.800000</span></span><br><span class="line"><span class="string">max    692795.000000          9.900000</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment"># 能够发现许多异常值</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>最值</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&quot;投票人数&quot;</span>].<span class="built_in">max</span>()</span><br><span class="line"><span class="comment"># 输出结果为 692795</span></span><br><span class="line">df[<span class="string">&quot;投票人数&quot;</span>].<span class="built_in">min</span>()</span><br><span class="line"><span class="comment"># 输出结果为 5</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>均值和中值</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&quot;投票人数&quot;</span>].mean()</span><br><span class="line"><span class="comment"># 输出结果为 6265.054786983179</span></span><br><span class="line">df[<span class="string">&quot;投票人数&quot;</span>].median()</span><br><span class="line"><span class="comment"># 输出结果为 354.0</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>方差和标准差</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;评分&#x27;</span>].var()</span><br><span class="line"><span class="comment"># 输出结果为 1.6131566164910176</span></span><br><span class="line">df[<span class="string">&#x27;评分&#x27;</span>].std()</span><br><span class="line"><span class="comment"># 输出结果为 1.2701010260963566</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>求和</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df.投票人数.<span class="built_in">sum</span>()</span><br><span class="line"><span class="comment"># 输出结果为 239626825.94</span></span><br><span class="line"><span class="comment"># 有异常值</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>相关系数，协方差</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">df[[<span class="string">&#x27;投票人数&#x27;</span>, <span class="string">&#x27;评分&#x27;</span>]].corr()</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">          投票人数        评分</span></span><br><span class="line"><span class="string">投票人数  1.000000   0.122883</span></span><br><span class="line"><span class="string">评分     0.122883    1.000000</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">df[[<span class="string">&#x27;投票人数&#x27;</span>, <span class="string">&#x27;评分&#x27;</span>]].cov()</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">              投票人数           评分</span></span><br><span class="line"><span class="string">投票人数  6.834836e+08    4080.313942</span></span><br><span class="line"><span class="string">评分      4.080314e+03      1.613157</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>计数</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(df))</span><br><span class="line"><span class="comment"># 输出结果为 38738</span></span><br><span class="line">df[<span class="string">&#x27;产地&#x27;</span>].unique()</span><br><span class="line"><span class="string">&quot;&quot;&quot; 输出结果为 [&#x27;美国&#x27; &#x27;意大利&#x27; &#x27;中国大陆&#x27; &#x27;日本&#x27; &#x27;法国&#x27; &#x27;英国&#x27; &#x27;韩国&#x27; &#x27;中国香港&#x27; &#x27;阿根廷&#x27; &#x27;德国&#x27; &#x27;印度&#x27; &#x27;其他&#x27; &#x27;加拿大&#x27; &#x27;波兰&#x27; &#x27;泰国&#x27; &#x27;澳大利亚&#x27; &#x27;西班牙&#x27; &#x27;俄罗斯&#x27; &#x27;中国台湾&#x27; &#x27;荷兰&#x27; &#x27;丹麦&#x27; &#x27;比利时&#x27; &#x27;USA&#x27; &#x27;苏联&#x27; &#x27;墨西哥&#x27; &#x27;巴西&#x27; &#x27;瑞典&#x27; &#x27;西德&#x27;]&quot;&quot;&quot;</span></span><br><span class="line"><span class="built_in">len</span>(df[<span class="string">&#x27;产地&#x27;</span>].unique())</span><br><span class="line"><span class="comment"># 输出结果为 28</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 观察上述数据，包含一些重复数据，此时我们可以将他们合并一下</span></span><br><span class="line">df[<span class="string">&#x27;产地&#x27;</span>].replace([<span class="string">&#x27;USA&#x27;</span>, <span class="string">&#x27;西德&#x27;</span>, <span class="string">&#x27;苏联&#x27;</span>], [<span class="string">&#x27;美国&#x27;</span>, <span class="string">&#x27;德国&#x27;</span>, <span class="string">&#x27;俄罗斯&#x27;</span>], inplace=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(df[<span class="string">&#x27;产地&#x27;</span>].unique()))</span><br><span class="line"><span class="comment"># 输出结果为 25</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;年代&#x27;</span>].value_counts()</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">2012     2042</span></span><br><span class="line"><span class="string">2013     2001</span></span><br><span class="line"><span class="string">2008     1963</span></span><br><span class="line"><span class="string">2014     1887</span></span><br><span class="line"><span class="string">2010     1886</span></span><br><span class="line"><span class="string">         ... </span></span><br><span class="line"><span class="string">1892        1</span></span><br><span class="line"><span class="string">34943       1</span></span><br><span class="line"><span class="string">2008        1</span></span><br><span class="line"><span class="string">39180       1</span></span><br><span class="line"><span class="string">1890        1</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment"># 发现异常值</span></span><br></pre></td></tr></table></figure>
+<h2 id="数据透视"><a href="#数据透视" class="headerlink" title="数据透视"></a>数据透视</h2><ol>
+<li>基础形式</li>
+</ol>
+<p><code>pd.pivot_table(DataFrame, index=, values=, aggfunc=, fill_value)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">pd.pivot_table(df, index=[<span class="string">&#x27;年代&#x27;</span>])</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">              投票人数        评分</span></span><br><span class="line"><span class="string">年代                          </span></span><br><span class="line"><span class="string">1888    388.000000  7.950000</span></span><br><span class="line"><span class="string">1890     51.000000  4.800000</span></span><br><span class="line"><span class="string">1892    176.000000  7.500000</span></span><br><span class="line"><span class="string">1894    112.666667  6.633333</span></span><br><span class="line"><span class="string">1895    959.875000  7.575000</span></span><br><span class="line"><span class="string"><span class="meta">... </span>           ...       ...</span></span><br><span class="line"><span class="string">2015   7841.408838  6.141960</span></span><br><span class="line"><span class="string">2016   7176.019380  5.868217</span></span><br><span class="line"><span class="string">34943   128.000000  9.900000</span></span><br><span class="line"><span class="string">39180    49.000000  8.900000</span></span><br><span class="line"><span class="string">2008    544.000000  2.700000</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li><strong>多个索引</strong></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">pd.pivot_table(df, index=[<span class="string">&#x27;年代&#x27;</span>, <span class="string">&#x27;产地&#x27;</span>])</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">                    投票人数    评分</span></span><br><span class="line"><span class="string">年代    产地                      </span></span><br><span class="line"><span class="string">1888  英国      388.000000  7.95</span></span><br><span class="line"><span class="string">1890  美国       51.000000  4.80</span></span><br><span class="line"><span class="string">1892  法国      176.000000  7.50</span></span><br><span class="line"><span class="string">1894  法国      148.000000  7.00</span></span><br><span class="line"><span class="string">      美国       95.000000  6.45</span></span><br><span class="line"><span class="string"><span class="meta">... </span>                 ...   ...</span></span><br><span class="line"><span class="string">2016  英国    14607.272727  7.20</span></span><br><span class="line"><span class="string">      韩国     1739.850000  5.73</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>指定所需统计汇总的数据</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">pd.pivot_table(df, index=[<span class="string">&#x27;年代&#x27;</span>, <span class="string">&#x27;产地&#x27;</span>], values=[<span class="string">&#x27;评分&#x27;</span>])</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">              评分</span></span><br><span class="line"><span class="string">年代    产地        </span></span><br><span class="line"><span class="string">1888  英国    7.95</span></span><br><span class="line"><span class="string">1890  美国    4.80</span></span><br><span class="line"><span class="string">1892  法国    7.50</span></span><br><span class="line"><span class="string">1894  法国    7.00</span></span><br><span class="line"><span class="string">      美国    6.45</span></span><br><span class="line"><span class="string"><span class="meta">... </span>         ...</span></span><br><span class="line"><span class="string">2016  英国    7.20</span></span><br><span class="line"><span class="string">      韩国    5.73</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>指定函数，统计不同的统计值</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">pd.pivot_table(df, index=[<span class="string">&#x27;年代&#x27;</span>, <span class="string">&#x27;产地&#x27;</span>], values=[<span class="string">&#x27;投票人数&#x27;</span>], aggfunc=np.<span class="built_in">sum</span>)</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">                投票人数</span></span><br><span class="line"><span class="string">年代    产地            </span></span><br><span class="line"><span class="string">1888  英国       776.0</span></span><br><span class="line"><span class="string">1890  美国        51.0</span></span><br><span class="line"><span class="string">1892  法国       176.0</span></span><br><span class="line"><span class="string">1894  法国       148.0</span></span><br><span class="line"><span class="string">      美国       190.0</span></span><br><span class="line"><span class="string"><span class="meta">... </span>             ...</span></span><br><span class="line"><span class="string">2016  英国    160680.0</span></span><br><span class="line"><span class="string">      韩国     34797.0</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>非数值（NaN）难以处理。若果想移除它们，可以使用<code>fill_value</code>将其设置为0</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.pivot_table(df, index=[<span class="string">&#x27;年代&#x27;</span>, <span class="string">&#x27;产地&#x27;</span>], values=[<span class="string">&#x27;投票人数&#x27;</span>], aggfunc=np.<span class="built_in">sum</span>, fill_value=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>加入<code>margins=True</code>，可以在下方显示一些总和数据</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">pd.pivot_table(df, index=[<span class="string">&#x27;年代&#x27;</span>, <span class="string">&#x27;产地&#x27;</span>], values=[<span class="string">&#x27;投票人数&#x27;</span>], aggfunc=np.<span class="built_in">sum</span>, fill_value=<span class="number">0</span>, margins=<span class="literal">True</span>)</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">                    投票人数</span></span><br><span class="line"><span class="string">年代    产地                </span></span><br><span class="line"><span class="string">1888  英国    7.760000e+02</span></span><br><span class="line"><span class="string">1890  美国    5.100000e+01</span></span><br><span class="line"><span class="string">1892  法国    1.760000e+02</span></span><br><span class="line"><span class="string">1894  法国    1.480000e+02</span></span><br><span class="line"><span class="string">      美国    1.900000e+02</span></span><br><span class="line"><span class="string"><span class="meta">... </span>                 ...</span></span><br><span class="line"><span class="string">2016  韩国    3.479700e+04</span></span><br><span class="line"><span class="string">All          2.396268e+08</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>对不同值执行不同函数，可以向<code>aggfunc</code>传入一个字典，不过要求标签足够简洁</li>
+</ol>
+<p><strong>透视表过滤</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">table = pd.pivot_table(df, index=[<span class="string">&#x27;年代&#x27;</span>], values=[<span class="string">&#x27;评分&#x27;</span>], aggfunc=np.mean, fill_value=<span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(table[table.index == <span class="number">1994</span>])</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">           评分</span></span><br><span class="line"><span class="string">年代            </span></span><br><span class="line"><span class="string">1994  7.262348</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="数据重塑和轴向旋转"><a href="#数据重塑和轴向旋转" class="headerlink" title="数据重塑和轴向旋转"></a>数据重塑和轴向旋转</h2><h3 id="层次化索引"><a href="#层次化索引" class="headerlink" title="层次化索引"></a>层次化索引</h3><p>层次化索引时Pandas的一项重要功能，它能使我们在一个轴上拥有多个索引</p>
+<h4 id="Series的层次化索引"><a href="#Series的层次化索引" class="headerlink" title="Series的层次化索引"></a>Series的层次化索引</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">s = pd.Series(np.arange(<span class="number">1</span>, <span class="number">10</span>), index=[[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]])</span><br><span class="line"><span class="built_in">print</span>(s)</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为</span></span><br><span class="line"><span class="string">a  1    1</span></span><br><span class="line"><span class="string">   2    2</span></span><br><span class="line"><span class="string">   3    3</span></span><br><span class="line"><span class="string">b  1    4</span></span><br><span class="line"><span class="string">   2    5</span></span><br><span class="line"><span class="string">c  3    6</span></span><br><span class="line"><span class="string">   1    7</span></span><br><span class="line"><span class="string">d  2    8</span></span><br><span class="line"><span class="string">   3    9</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="built_in">print</span>(s.index)</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">MultiIndex([(&#x27;a&#x27;, 1),(&#x27;a&#x27;, 2),(&#x27;a&#x27;, 3),</span></span><br><span class="line"><span class="string">            (&#x27;b&#x27;, 1),(&#x27;b&#x27;, 2),</span></span><br><span class="line"><span class="string">            (&#x27;c&#x27;, 3),(&#x27;c&#x27;, 1),</span></span><br><span class="line"><span class="string">            (&#x27;d&#x27;, 2),(&#x27;d&#x27;, 3)],)</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="built_in">print</span>(s[: , <span class="number">1</span>])</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为</span></span><br><span class="line"><span class="string">a	1</span></span><br><span class="line"><span class="string">b	4</span></span><br><span class="line"><span class="string">c	7</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span> </span><br><span class="line"><span class="built_in">print</span>(s[<span class="string">&#x27;a&#x27;</span>, <span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+<p><strong>通过unstack方法可以将Series变成一个DataFrame</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = pd.Series(np.arange(<span class="number">1</span>, <span class="number">10</span>), index=[[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]])</span><br><span class="line">df = s.unstack()</span><br><span class="line">s = df.stack()</span><br></pre></td></tr></table></figure>
+<h4 id="DataFrame的层次化索引"><a href="#DataFrame的层次化索引" class="headerlink" title="DataFrame的层次化索引"></a>DataFrame的层次化索引</h4><p>对于DataFrame来说，行和列都能够进行层次化索引</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">data = pd.DataFrame(np.arange(<span class="number">12</span>).reshape(<span class="number">4</span>, <span class="number">3</span>), index=[[<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;b&#x27;</span>], [<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>]], columns=[[<span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>], [<span class="string">&#x27;Z&#x27;</span>, <span class="string">&#x27;X&#x27;</span>, <span class="string">&#x27;C&#x27;</span>]])</span><br><span class="line"><span class="built_in">print</span>(data)</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">     A       B</span></span><br><span class="line"><span class="string">     Z   X   C</span></span><br><span class="line"><span class="string">a 1  0   1   2</span></span><br><span class="line"><span class="string">  2  3   4   5</span></span><br><span class="line"><span class="string">b 1  6   7   8</span></span><br><span class="line"><span class="string">  2  9  10  11</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="built_in">print</span>(data.loc[<span class="string">&#x27;a&#x27;</span>, <span class="number">2</span>][<span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;X&#x27;</span>])</span><br><span class="line"><span class="comment"># 输出结果为 4</span></span><br><span class="line">data.index.names = [<span class="string">&#x27;row1&#x27;</span>, <span class="string">&#x27;row2&#x27;</span>]</span><br><span class="line">data.columns.names = [<span class="string">&#x27;col1&#x27;</span>, <span class="string">&#x27;col2&#x27;</span>]</span><br><span class="line"><span class="built_in">print</span>(data)</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">     col1  A       B</span></span><br><span class="line"><span class="string">     col2  Z   X   C</span></span><br><span class="line"><span class="string">row1 row2           </span></span><br><span class="line"><span class="string">a    1     0   1   2</span></span><br><span class="line"><span class="string">     2     3   4   5</span></span><br><span class="line"><span class="string">b    1     6   7   8</span></span><br><span class="line"><span class="string">     2     9  10  11</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">data.swaplevel(<span class="string">&#x27;row1&#x27;</span>, <span class="string">&#x27;row2&#x27;</span>)</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">     col1  A       B</span></span><br><span class="line"><span class="string">     col2  Z   X   C</span></span><br><span class="line"><span class="string">row2 row1           </span></span><br><span class="line"><span class="string">1    a     0   1   2</span></span><br><span class="line"><span class="string">1    a     3   4   5</span></span><br><span class="line"><span class="string">2    b     6   7   8</span></span><br><span class="line"><span class="string">2    b     9  10  11</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong><code>set_index</code>可以把列变成索引</strong></p>
+<p><strong><code>reset_index</code>可以把索引变成列</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">df = df.set_index([<span class="string">&quot;产地&quot;</span>, <span class="string">&quot;年代&quot;</span>])</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">               名字      投票人数        类型                 上映时间   时长   评分    首映地点</span></span><br><span class="line"><span class="string">产地   年代                                                                     </span></span><br><span class="line"><span class="string">美国   1994  肖申克的救赎  692795.0     剧情/犯罪  1994-09-10 00:00:00  142  9.6  多伦多电影节</span></span><br><span class="line"><span class="string">     1957    控方证人   42995.0  剧情/悬疑/犯罪  1957-12-17 00:00:00  116  9.5      美国</span></span><br><span class="line"><span class="string">意大利  1997   美丽人生   327855.0  剧情/喜剧/爱情  1997-12-20 00:00:00  116  9.5     意大利</span></span><br><span class="line"><span class="string">美国   1994    阿甘正传  580897.0     剧情/爱情  1994-06-23 00:00:00  142  9.4   洛杉矶首映</span></span><br><span class="line"><span class="string">中国大陆 1993    霸王别姬  478523.0  剧情/爱情/同性  1993-01-01 00:00:00  171  9.4      香港</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>每一个索引都是一个元组</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.index[<span class="number">0</span>]</span><br><span class="line"><span class="comment"># 输出结果为 (&#x27;美国&#x27;, 1994)</span></span><br></pre></td></tr></table></figure>
+<p><strong>获取所有的美国电影，由于产地信息已经变成了索引，因此要是用.loc方法</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(df.loc[<span class="string">&#x27;美国&#x27;</span>][:<span class="number">5</span>])</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">          名字      投票人数        类型                 上映时间   时长   评分    首映地点</span></span><br><span class="line"><span class="string">年代                                                                     </span></span><br><span class="line"><span class="string">1994  肖申克的救赎  692795.0     剧情/犯罪  1994-09-10 00:00:00  142  9.6  多伦多电影节</span></span><br><span class="line"><span class="string">1957    控方证人   42995.0  剧情/悬疑/犯罪  1957-12-17 00:00:00  116  9.5      美国</span></span><br><span class="line"><span class="string">1994    阿甘正传  580897.0     剧情/爱情  1994-06-23 00:00:00  142  9.4   洛杉矶首映</span></span><br><span class="line"><span class="string">2012  泰坦尼克号   157074.0  剧情/爱情/灾难  2012-04-10 00:00:00  194  9.4    中国大陆</span></span><br><span class="line"><span class="string">1993  辛德勒的名单  306904.0  剧情/历史/战争  1993-11-30 00:00:00  195  9.4   华盛顿首映</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>取消层次化索引</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">df = df.reset_index()</span><br><span class="line"><span class="built_in">print</span>(df[:<span class="number">5</span>])</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">     产地    年代      名字      投票人数  ...                 上映时间   时长   评分    首映地点</span></span><br><span class="line"><span class="string">0    美国  1994  肖申克的救赎  692795.0  ...  1994-09-10 00:00:00  142  9.6  多伦多电影节</span></span><br><span class="line"><span class="string">1    美国  1957    控方证人   42995.0  ...  1957-12-17 00:00:00  116  9.5      美国</span></span><br><span class="line"><span class="string">2   意大利  1997   美丽人生   327855.0  ...  1997-12-20 00:00:00  116  9.5     意大利</span></span><br><span class="line"><span class="string">3    美国  1994    阿甘正传  580897.0  ...  1994-06-23 00:00:00  142  9.4   洛杉矶首映</span></span><br><span class="line"><span class="string">4  中国大陆  1993    霸王别姬  478523.0  ...  1993-01-01 00:00:00  171  9.4      香港</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="数据旋转"><a href="#数据旋转" class="headerlink" title="数据旋转"></a>数据旋转</h3><p>行列转化：以前3部电影为例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">data = df[:<span class="number">3</span>]</span><br><span class="line">data.T</span><br><span class="line"><span class="comment"># .T可以直接让数据的行列进行交换</span></span><br><span class="line"><span class="built_in">print</span>(data)</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">                        0                    1                    2</span></span><br><span class="line"><span class="string">名字                 肖申克的救赎            控方证人                美丽人生 </span></span><br><span class="line"><span class="string">投票人数             692795.0              42995.0             327855.0</span></span><br><span class="line"><span class="string">类型                  剧情/犯罪             剧情/悬疑/犯罪             剧情/喜剧/爱情</span></span><br><span class="line"><span class="string">产地                     美国                   美国                  意大利</span></span><br><span class="line"><span class="string">上映时间  1994-09-10 00:00:00  1957-12-17 00:00:00  1997-12-20 00:00:00</span></span><br><span class="line"><span class="string">时长                    142                  116                  116</span></span><br><span class="line"><span class="string">年代                   1994                 1957                 1997</span></span><br><span class="line"><span class="string">评分                    9.6                  9.5                  9.5</span></span><br><span class="line"><span class="string">首映地点               多伦多电影节               美国                  意大利</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="数据分组，分组运算"><a href="#数据分组，分组运算" class="headerlink" title="数据分组，分组运算"></a>数据分组，分组运算</h2><p><strong>GroupBy技术：实现数据的分组，和分组运算，作用类似于数据透视表</strong></p>
+<p><strong>按照电影的产地进行分组</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">group = df.groupby(df[<span class="string">&#x27;产地&#x27;</span>])</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">USA       319.132743  7.313274</span></span><br><span class="line"><span class="string">中国台湾   8474.864078  7.066667</span></span><br><span class="line"><span class="string">中国大陆  10895.461741  6.065711</span></span><br><span class="line"><span class="string">中国香港   8164.554348  6.474053</span></span><br><span class="line"><span class="string">丹麦     1993.858586  7.245960</span></span><br><span class="line"><span class="string">俄罗斯    1540.036199  7.139819</span></span><br><span class="line"><span class="string">其他     1590.686979  7.237448</span></span><br><span class="line"><span class="string">加拿大    1915.304288  6.733610</span></span><br><span class="line"><span class="string">印度     3210.843137  6.872269</span></span><br><span class="line"><span class="string">墨西哥    1173.218487  7.087395</span></span><br><span class="line"><span class="string">巴西     3536.000000  7.262376</span></span><br><span class="line"><span class="string">德国     2848.099778  7.155322</span></span><br><span class="line"><span class="string">意大利    3340.740988  7.179306</span></span><br><span class="line"><span class="string">日本     3562.366357  7.194953</span></span><br><span class="line"><span class="string">比利时    1230.122302  7.217986</span></span><br><span class="line"><span class="string">法国     3625.789446  7.239084</span></span><br><span class="line"><span class="string">波兰      881.640884  7.441989</span></span><br><span class="line"><span class="string">泰国     5322.724490  6.109184</span></span><br><span class="line"><span class="string">澳大利亚   4719.043333  6.978000</span></span><br><span class="line"><span class="string">瑞典     1495.664948  7.421649</span></span><br><span class="line"><span class="string">美国     8576.623030  6.943452</span></span><br><span class="line"><span class="string">苏联      569.449219  7.912500</span></span><br><span class="line"><span class="string">英国     4795.368440  7.527181</span></span><br><span class="line"><span class="string">荷兰      934.425806  7.190323</span></span><br><span class="line"><span class="string">西德      861.515385  7.494615</span></span><br><span class="line"><span class="string">西班牙    3326.024609  7.024385</span></span><br><span class="line"><span class="string">阿根廷    2226.474138  7.273276</span></span><br><span class="line"><span class="string">韩国     6484.885270  6.362990</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>计算每年的平均评分</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;评分&#x27;</span>].groupby(df[<span class="string">&#x27;年代&#x27;</span>]).mean()</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">1888    7.950000</span></span><br><span class="line"><span class="string">1890    4.800000</span></span><br><span class="line"><span class="string">1892    7.500000</span></span><br><span class="line"><span class="string">1894    6.633333</span></span><br><span class="line"><span class="string">1895    7.575000</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>获得每个地区，每一年的电影的评分的均值</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;评分&#x27;</span>].groupby(df[<span class="string">&#x27;地区&#x27;</span>], df[<span class="string">&#x27;年代&#x27;</span>]).mean()</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">产地   年代  </span></span><br><span class="line"><span class="string">USA  1955    7.342857</span></span><br><span class="line"><span class="string">     1956    7.312500</span></span><br><span class="line"><span class="string">     1963    7.200000</span></span><br><span class="line"><span class="string">     1965    8.500000</span></span><br><span class="line"><span class="string">     1973    6.800000</span></span><br><span class="line"><span class="string">               ...   </span></span><br><span class="line"><span class="string">韩国  2012    6.064151</span></span><br><span class="line"><span class="string">     2013    6.098198</span></span><br><span class="line"><span class="string">     2014    5.650833</span></span><br><span class="line"><span class="string">     2015    5.423853</span></span><br><span class="line"><span class="string">     2016    5.730000</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="离散化处理"><a href="#离散化处理" class="headerlink" title="离散化处理"></a>离散化处理</h2><p><strong>在实际的数据分析项目中，对有的数据属性，我们往往并不关注数据的绝对取值，只关注它所处的区间或者等级</strong></p>
+<p>Pandas为我们提供了方便的函数<code>cut()</code></p>
+<p>语法：<code>pd.cut(x, bins, right=True, labels=None, retbins=False, precision=3, include_lowest=Flase)</code></p>
+<p>参数解释：</p>
+<ul>
+<li><strong>x：需要离散化的数组、Series、DataFrame对象</strong></li>
+<li><strong>bins：分组的依据（可以是数字也可以是序列）</strong></li>
+<li><strong>right：是否包括右端点</strong></li>
+<li><strong>include_lowest：是否包括左端点</strong></li>
+<li><strong>labels：是否使用标记来替换分组名称</strong></li>
+<li>retbins：是否返回bins中每个值的列表</li>
+<li>precision：精度设置</li>
+</ul>
+<p><strong>将9分以上的电影定义为A，7-9定义为B，5-7定义为C，3-5定义为D，小于3分定义为E</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;评分等级&#x27;</span>] = pd.cut(df[<span class="string">&#x27;评分&#x27;</span>], [<span class="number">0</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">10</span>], labels=[<span class="string">&#x27;E&#x27;</span>, <span class="string">&#x27;D&#x27;</span>, <span class="string">&#x27;C&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;A&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span>(df[:<span class="number">5</span>])</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">       名字      投票人数        类型    产地  ...    年代   评分    首映地点  评分等级</span></span><br><span class="line"><span class="string">0  肖申克的救赎  692795.0     剧情/犯罪    美国  ...  1994  9.6  多伦多电影节     A</span></span><br><span class="line"><span class="string">1    控方证人   42995.0  剧情/悬疑/犯罪    美国  ...  1957  9.5      美国     A</span></span><br><span class="line"><span class="string">2   美丽人生   327855.0  剧情/喜剧/爱情   意大利  ...  1997  9.5     意大利     A</span></span><br><span class="line"><span class="string">3    阿甘正传  580897.0     剧情/爱情    美国  ...  1994  9.4   洛杉矶首映     A</span></span><br><span class="line"><span class="string">4    霸王别姬  478523.0  剧情/爱情/同性  中国大陆  ...  1993  9.4      香港     A</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>投票越多的电影热门程度越高</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">bins = np.percentile(df[<span class="string">&#x27;投票人数&#x27;</span>], [<span class="number">0</span>, <span class="number">20</span>, <span class="number">40</span>, <span class="number">60</span>, <span class="number">80</span>, <span class="number">100</span>])</span><br><span class="line">df[<span class="string">&#x27;热门程度&#x27;</span>] = pd.cut(df[<span class="string">&#x27;投票人数&#x27;</span>], bins, labels=[<span class="string">&#x27;E&#x27;</span>, <span class="string">&#x27;D&#x27;</span>, <span class="string">&#x27;C&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;A&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span>(df[:<span class="number">5</span>])</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">       名字      投票人数        类型    产地  ...   评分    首映地点 评分等级  热门程度</span></span><br><span class="line"><span class="string">0  肖申克的救赎  692795.0     剧情/犯罪    美国  ...  9.6  多伦多电影节    A     A</span></span><br><span class="line"><span class="string">1    控方证人   42995.0  剧情/悬疑/犯罪    美国  ...  9.5      美国    A     A</span></span><br><span class="line"><span class="string">2   美丽人生   327855.0  剧情/喜剧/爱情   意大利  ...  9.5     意大利    A     A</span></span><br><span class="line"><span class="string">3    阿甘正传  580897.0     剧情/爱情    美国  ...  9.4   洛杉矶首映    A     A</span></span><br><span class="line"><span class="string">4    霸王别姬  478523.0  剧情/爱情/同性  中国大陆  ...  9.4      香港    A     A</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>烂片大合集</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;评分等级&#x27;</span>] = pd.cut(df[<span class="string">&#x27;评分&#x27;</span>], [<span class="number">0</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">10</span>], labels=[<span class="string">&#x27;E&#x27;</span>, <span class="string">&#x27;D&#x27;</span>, <span class="string">&#x27;C&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;A&#x27;</span>])</span><br><span class="line">bins = np.percentile(df[<span class="string">&#x27;投票人数&#x27;</span>], [<span class="number">0</span>, <span class="number">20</span>, <span class="number">40</span>, <span class="number">60</span>, <span class="number">80</span>, <span class="number">100</span>])</span><br><span class="line">df[<span class="string">&#x27;热门程度&#x27;</span>] = pd.cut(df[<span class="string">&#x27;投票人数&#x27;</span>], bins, labels=[<span class="string">&#x27;E&#x27;</span>, <span class="string">&#x27;D&#x27;</span>, <span class="string">&#x27;C&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;A&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span>(df[(df.热门程度 == <span class="string">&#x27;A&#x27;</span>) &amp; (df.评分等级 == <span class="string">&#x27;E&#x27;</span>)][:<span class="number">5</span>])</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">        名字    投票人数        类型    产地  ...   评分  首映地点 评分等级  热门程度</span></span><br><span class="line"><span class="string">655     B区  5187.0  剧情/惊悚/恐怖  中国大陆  ...  2.3  中国大陆    E     A</span></span><br><span class="line"><span class="string">4376    怖偶  4867.0     悬疑/惊悚  中国大陆  ...  2.8  中国大陆    E     A</span></span><br><span class="line"><span class="string">5413  床下有人  4309.0     悬疑/惊悚  中国大陆  ...  2.8  中国大陆    E     A</span></span><br><span class="line"><span class="string">6802  帝国秘符  4351.0     动作/冒险  中国大陆  ...  3.0  中国大陆    E     A</span></span><br><span class="line"><span class="string">8232    飞天  4764.0        剧情  中国大陆  ...  2.9  中国大陆    E     A</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>冷门佳作</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;评分等级&#x27;</span>] = pd.cut(df[<span class="string">&#x27;评分&#x27;</span>], [<span class="number">0</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">10</span>], labels=[<span class="string">&#x27;E&#x27;</span>, <span class="string">&#x27;D&#x27;</span>, <span class="string">&#x27;C&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;A&#x27;</span>])</span><br><span class="line">bins = np.percentile(df[<span class="string">&#x27;投票人数&#x27;</span>], [<span class="number">0</span>, <span class="number">20</span>, <span class="number">40</span>, <span class="number">60</span>, <span class="number">80</span>, <span class="number">100</span>])</span><br><span class="line">df[<span class="string">&#x27;热门程度&#x27;</span>] = pd.cut(df[<span class="string">&#x27;投票人数&#x27;</span>], bins, labels=[<span class="string">&#x27;E&#x27;</span>, <span class="string">&#x27;D&#x27;</span>, <span class="string">&#x27;C&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;A&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span>(df[(df.热门程度 == <span class="string">&#x27;E&#x27;</span>) &amp; (df.评分等级 == <span class="string">&#x27;A&#x27;</span>) &amp; df.名字])</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出结果为：</span></span><br><span class="line"><span class="string">587                               BBC喜剧音  38.0  喜剧/音乐/歌舞  ...      美国    A    E</span></span><br><span class="line"><span class="string">979    JOJO的奇妙冒险 特别见面会 Walk Like Crusade  36.0       纪录片  ...      美国    A    E</span></span><br><span class="line"><span class="string">1227                             Pond一家最  45.0       纪录片  ...      美国    A    E</span></span><br><span class="line"><span class="string">1741                         阿森纳：温格的十一人   74.0        运动  ...      美国    A    E</span></span><br><span class="line"><span class="string">1748                              阿斯加德远征  59.0       纪录片  ...      美国    A    E</span></span><br><span class="line"><span class="string"><span class="meta">... </span>                                 ...   ...       ...  ...     ...  ...  ...</span></span><br><span class="line"><span class="string">37398                              末了，未了  34.0  剧情/喜剧/爱情  ...      美国    A    E</span></span><br><span class="line"><span class="string">37554                               身经百战  74.0       纪录片  ...      美国    A    E</span></span><br><span class="line"><span class="string">37587                               歌唱神探  36.0  剧情/悬疑/歌舞  ...      美国    A    E</span></span><br><span class="line"><span class="string">38119                                山那边  70.0        剧情  ...      美国    A    E</span></span><br><span class="line"><span class="string">38452                                  奎  62.0    纪录片/短片  ...  纽约电影论坛    A    E</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="合并数据集"><a href="#合并数据集" class="headerlink" title="合并数据集"></a>合并数据集</h2><ul>
+<li><strong><code>DataFrame1.append(DataFrame2)</code></strong></li>
+<li><p><strong><code>pd.merge(left, right, how=&#39;inner&#39;, on=None, left_on=None, right_on=None, left_index=False, right_index=False, sort=True, suffixes=(&#39;_x&#39;, &#39;_y&#39;), copy=True, indicator=False)</code></strong>参数解释查看官方文档</p>
+</li>
+<li><p><strong><code>concat()</code>：</strong>将多个数据集进行批量合并</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/01/28/Python-NumPy/" rel="prev" title="Python - NumPy">
+      <i class="fa fa-chevron-left"></i> Python - NumPy
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/02/07/Python-Matplotlib/" rel="next" title="Python-Matplotlib">
+      Python-Matplotlib <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pandas"><span class="nav-number">1.</span> <span class="nav-text">Pandas</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pandas%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">Pandas的基本数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Series"><span class="nav-number">1.1.1.</span> <span class="nav-text">Series</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DataFrame"><span class="nav-number">1.1.2.</span> <span class="nav-text">DataFrame</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DataFrame%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">DataFrame的创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DataFrame%E6%95%B0%E6%8D%AE%E7%9A%84%E6%9F%A5%E7%9C%8B"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">DataFrame数据的查看</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pandas%E7%9A%84%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%8F%96%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.</span> <span class="nav-text">Pandas的数据读取及数据操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%8F%96"><span class="nav-number">1.2.1.</span> <span class="nav-text">数据读取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.2.</span> <span class="nav-text">数据操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%8C%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">行操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">列操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E9%80%89%E6%8B%A9"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">条件选择</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E5%A4%B1%E5%80%BC%E5%8F%8A%E5%BC%82%E5%B8%B8%E5%80%BC%E5%A4%84%E7%90%86"><span class="nav-number">1.2.3.</span> <span class="nav-text">缺失值及异常值处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%BA%E5%A4%B1%E5%80%BC%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">缺失值的处理方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E7%BC%BA%E5%A4%B1%E5%80%BC"><span class="nav-number">1.2.3.1.1.</span> <span class="nav-text">判断缺失值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A1%AB%E5%85%85%E7%BC%BA%E5%A4%B1%E5%80%BC"><span class="nav-number">1.2.3.1.2.</span> <span class="nav-text">填充缺失值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E7%BC%BA%E5%A4%B1%E5%80%BC"><span class="nav-number">1.2.3.1.3.</span> <span class="nav-text">删除缺失值</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%80%BC%E7%9A%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">异常值的处理方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BF%9D%E5%AD%98"><span class="nav-number">1.2.4.</span> <span class="nav-text">数据保存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.2.5.</span> <span class="nav-text">数据格式转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%8E%92%E5%BA%8F"><span class="nav-number">1.2.6.</span> <span class="nav-text">数据排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90"><span class="nav-number">1.2.7.</span> <span class="nav-text">基本统计分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%80%8F%E8%A7%86"><span class="nav-number">1.3.</span> <span class="nav-text">数据透视</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%87%8D%E5%A1%91%E5%92%8C%E8%BD%B4%E5%90%91%E6%97%8B%E8%BD%AC"><span class="nav-number">1.4.</span> <span class="nav-text">数据重塑和轴向旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%82%E6%AC%A1%E5%8C%96%E7%B4%A2%E5%BC%95"><span class="nav-number">1.4.1.</span> <span class="nav-text">层次化索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Series%E7%9A%84%E5%B1%82%E6%AC%A1%E5%8C%96%E7%B4%A2%E5%BC%95"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">Series的层次化索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DataFrame%E7%9A%84%E5%B1%82%E6%AC%A1%E5%8C%96%E7%B4%A2%E5%BC%95"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">DataFrame的层次化索引</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%97%8B%E8%BD%AC"><span class="nav-number">1.4.2.</span> <span class="nav-text">数据旋转</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E7%BB%84%EF%BC%8C%E5%88%86%E7%BB%84%E8%BF%90%E7%AE%97"><span class="nav-number">1.5.</span> <span class="nav-text">数据分组，分组运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A6%BB%E6%95%A3%E5%8C%96%E5%A4%84%E7%90%86"><span class="nav-number">1.6.</span> <span class="nav-text">离散化处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">1.7.</span> <span class="nav-text">合并数据集</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">林程星</p>
+  <div class="site-description" itemprop="description">‘绳’和‘棒’一样，是人类最早创造的工具之一。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林程星</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">94k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:26</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

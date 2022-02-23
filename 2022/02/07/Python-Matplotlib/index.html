@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icons8-pixel-star-96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icons8-pixel-star-48.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+  <meta name="description" content="Matplotlib 是一个 Python 的 2D 图形包。Pyplot 封装了很多画图的函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python-Matplotlib">
+<meta property="og:url" content="http://example.com/2022/02/07/Python-Matplotlib/index.html">
+<meta property="og:site_name" content="Please Lamp The Star">
+<meta property="og:description" content="Matplotlib 是一个 Python 的 2D 图形包。Pyplot 封装了很多画图的函数">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-07T08:36:16.000Z">
+<meta property="article:modified_time" content="2022-02-10T16:27:51.157Z">
+<meta property="article:author" content="林程星">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/02/07/Python-Matplotlib/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Python-Matplotlib | Please Lamp The Star</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Please Lamp The Star</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/07/Python-Matplotlib/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林程星">
+      <meta itemprop="description" content="‘绳’和‘棒’一样，是人类最早创造的工具之一。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Please Lamp The Star">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python-Matplotlib
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-07 16:36:16" itemprop="dateCreated datePublished" datetime="2022-02-07T16:36:16+08:00">2022-02-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-02-11 00:27:51" itemprop="dateModified" datetime="2022-02-11T00:27:51+08:00">2022-02-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Matplotlib 是一个 Python 的 2D 图形包。Pyplot 封装了很多画图的函数</p>
+<span id="more"></span>
+<h1 id="Matplotlib"><a href="#Matplotlib" class="headerlink" title="Matplotlib"></a>Matplotlib</h1><p><strong>导入matplotlib包、pandas包和numpy包</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> p</span><br></pre></td></tr></table></figure>
+<p><strong>注：以下代码均在matplotlib包、numpy包和pandas包已被导入的情况下运行</strong></p>
+<h2 id="Matplotlib基础"><a href="#Matplotlib基础" class="headerlink" title="Matplotlib基础"></a>Matplotlib基础</h2><h3 id="plt-show-函数"><a href="#plt-show-函数" class="headerlink" title="plt.show()函数"></a><code>plt.show()</code>函数</h3><p>默认情况下，matplotlib.pyplot并不会直接显示图像，只有调用<code>plt.show()</code>函数时，图像才会显示</p>
+<h3 id="plt-plot-函数"><a href="#plt-plot-函数" class="headerlink" title="plt.plot()函数"></a><code>plt.plot()</code>函数</h3><p><strong>例子：</strong></p>
+<p><code>plt.plot()</code>函数可以用来绘制线型图</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.plot([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line">plt.ylabel(<span class="string">&#x27;y&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;x&#x27;</span>)</span><br><span class="line"><span class="comment"># 目前输入中文会出现乱码</span></span><br></pre></td></tr></table></figure>
+<p><strong>基本用法：</strong></p>
+<p>指定x和y</p>
+<ul>
+<li><code>plt.plot(x, y)</code></li>
+</ul>
+<p>默认参数，x为0~N-1</p>
+<ul>
+<li><code>plt.plot(y)</code></li>
+</ul>
+<p>因此，在上述例子中，我们没有给定x的值，所以其默认值为[0, 1, 2, 3]</p>
+<p><strong>字符参数：</strong></p>
+<ul>
+<li><p>常用颜色字符参数</p>
+<p>| 字符 | 颜色 |<br>| —— | —— |<br>| ‘b’  | 蓝色 |<br>| ‘g’  | 绿色 |<br>| ‘r’  | 红色 |<br>| ‘c’  | 青色 |<br>| ‘m’  | 品红 |<br>| ‘y’  | 黄色 |<br>| ‘k’  | 黑色 |<br>| ‘w’  | 白色 |</p>
+</li>
+<li><p>类型字符参数</p>
+<p>| 字符  | 类型       | 字符  | 类型      |<br>| ——- | ————— | ——- | ————- |<br>| ‘-’   | 实线       | ‘- -’ | 虚线      |<br>| <code>-.</code>  | 虚点线     | ‘ : ’ | 点线      |<br>| ‘ . ’ | 点         | ‘ , ’ | 像素点    |<br>| ‘ o ’ | 圆点       | ‘ v ’ | 下三角点  |<br>| ‘ ^ ’ | 上三角点   | ‘ &lt; ’ | 左三角点  |<br>| ‘ &gt; ’ | 右三角点   | ‘ 1 ’ | 下三叉点  |<br>| ‘ 2 ’ | 上三叉点   | ‘ 3 ’ | 左三叉点  |<br>| ‘ 4 ’ | 右三叉点   | ‘ s ’ | 正方点    |<br>| ‘ p ’ | 五角点     | ‘ * ’ | 星形点    |<br>| ‘ h ’ | 六边形点1  | ‘ H ’ | 六边形点2 |<br>| ‘ + ’ | 加号点     | ‘ x ’ | 乘号点    |<br>| ‘ D ’ | 实心菱形点 | ‘ d ’ | 瘦菱形点  |<br>| ‘__’  | 横线点     |       |           |</p>
+<p>例如我们要画出黄色星星</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.plot([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], [<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>], <span class="string">&#x27;y*&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><strong>显示范围</strong></p>
+<p>使用<code>axis()</code>函数指定坐标轴的显示范围</p>
+<p>语法：<code>plt.axis([xmin, xmax, ymin, ymax])</code></p>
+<p><strong>传入Numpy数组</strong></p>
+<p>之前我们传给plot的参数都是列表，事实上，向plot中传入numpy数组时更常用的做法。事实上，如果传入的是列表，matplotlib会在内部将它转化成数组再进行处理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t = np.arange(<span class="number">0.</span>, <span class="number">5.0</span>, <span class="number">0.2</span>)</span><br><span class="line">plt.plot(t, t, <span class="string">&#x27;r--&#x27;</span>, t, t**<span class="number">2</span>, <span class="string">&#x27;bs&#x27;</span>, t, t**<span class="number">3</span>, <span class="string">&#x27;g^&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><strong>传入多组数据</strong></p>
+<p>事实上，在上面的例子中，我们不仅向<code>plot()</code>函数传入了数组，还传入了<code>(x, y, format_str)</code>参数，它们在同一张图上显示</p>
+<p>这意味着我们不需要使用多个<code>plot()</code>函数来画多组数组，只需要可以将这些组合放到一个<code>plot()</code>函数中去即可</p>
+<p><strong>线条属性</strong></p>
+<p>之前提到，我们可以用字符串来控制线条的属性，事实上还可以通过关键词来改变线条的性质，例如<code>linewidth</code>可以改变线条的宽度，<code>color</code>可以改变线条的颜色：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x = np.linspace(-np.pi, np.pi)</span><br><span class="line">y = np.sin(x)</span><br><span class="line">plt.plot(x, y, linewidth=<span class="number">4.0</span>, color=<span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><strong>使用<code>plo.plot()</code>的返回值来设置线条属性</strong></p>
+<p><code>plot()</code>函数返回一个Line2D对象组成的列表，每个对象代表输入的一对组合，例如：</p>
+<ul>
+<li>line1，line2为两个Line2D对象</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">line1, line2 = plt.plot(x1, y1, x2, y2)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>返回3个Line2D对象组成的对象</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lines = plt.plot(x1, y1, x2, y2, x3, y3)</span><br></pre></td></tr></table></figure>
+<p>我们可以使用这个返回值来对线条属性进行设置：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">line1, line2 = plt.plot(x, y, <span class="string">&#x27;r-&#x27;</span>, x, y+<span class="number">1</span>, <span class="string">&#x27;g-&#x27;</span>)</span><br><span class="line">line1.set_antialiased(<span class="literal">False</span>)</span><br><span class="line"><span class="comment"># 关闭抗锯齿</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="plt-setp-函数"><a href="#plt-setp-函数" class="headerlink" title="plt.setp()函数"></a><code>plt.setp()</code>函数</h3><p>更方便的做法是使用<code>plt.setp()</code>函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">line = plt.plot(x, y)</span><br><span class="line">plt.setp(line, color=<span class="string">&#x27;g&#x27;</span>, linewidth=<span class="number">4</span>)</span><br><span class="line"><span class="comment"># plt.setp(line, &#x27;color&#x27;, &#x27;r&#x27;, &#x27;linewidth&#x27;, 4) MatLab风格写法</span></span><br></pre></td></tr></table></figure>
+<h3 id="子图"><a href="#子图" class="headerlink" title="子图"></a>子图</h3><p><code>figure()</code>函数会产生一个指定编号为num的图形：</p>
+<p><code>plt.figure(num)</code></p>
+<p>这里，figure(1)起始时可以省略的，因为默认情况下plt会自动产生一幅图像</p>
+<p>使用<code>plt.subplot</code>可以在一幅图中生成多个子图，其参数为：</p>
+<p><code>plt.subplot(numrows, numcols, fignum)</code></p>
+<p>当numrows * numcols &lt; 10 时，中间的逗号可以省略，因此<code>plt.subplot(211)</code>就相当于<code>plt.subplot(2, 1, 1)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span>(<span class="params">t</span>):</span></span><br><span class="line">    <span class="keyword">return</span> np.exp(-t) * np.cos(<span class="number">2</span> * np.pi * t)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">t1 = np.arange(<span class="number">0.</span>, <span class="number">5.</span>, <span class="number">0.1</span>)</span><br><span class="line">t2 = np.arange(<span class="number">0.</span>, <span class="number">5.</span>, <span class="number">0.02</span>)</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">plt.subplot(<span class="number">211</span>)</span><br><span class="line">plt.plot(t1, f(t1), <span class="string">&#x27;bo&#x27;</span>, t2, f(t2), <span class="string">&#x27;k&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">212</span>)</span><br><span class="line">plt.plot(t2, np.cos(<span class="number">2</span> * np.pi * t2), <span class="string">&#x27;r--&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h2 id="数据可视化"><a href="#数据可视化" class="headerlink" title="数据可视化"></a>数据可视化</h2><p><strong>解决报错问题：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(<span class="string">&#x27;ignore&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>解决乱码问题：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.rcParams[<span class="string">&#x27;font.sans-serif&#x27;</span>] = [<span class="string">&#x27;SimHei&#x27;</span>]</span><br><span class="line"><span class="comment"># 将字体设置为黑体字</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;axes.unicode_minus&#x27;</span>] = <span class="literal">False</span></span><br><span class="line"><span class="comment"># 使负号正常显示</span></span><br></pre></td></tr></table></figure>
+<p><strong>数据读取：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_excel(<span class="string">r&quot;C:\Users\lcx\Desktop\Study\RDC大数据\豆瓣电影数据.xlsx&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="绘制柱状图"><a href="#绘制柱状图" class="headerlink" title="绘制柱状图"></a>绘制柱状图</h3><p>柱状图（bar chart），是一种以长方形的长度为变量的表达图形的统计报告图，有一系列高度不等的纵向条纹表示数据分布的情况，用来比较两个或以上价值（不同条件下），只有一个变量，通常利用与较小的数据集分析。柱状图亦可横向排列，或用多维方式表达</p>
+<p><strong>绘制每个国家或地区的电影数量的柱状图</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">data = df[<span class="string">&#x27;产地&#x27;</span>].value_counts()</span><br><span class="line">x = data.index</span><br><span class="line">y = data.values</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">plt.bar(x, y, color=<span class="string">&#x27;b&#x27;</span>)</span><br><span class="line"><span class="comment"># 绘制柱状图的基本指令</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加一点点细节</span></span><br><span class="line">plt.title(<span class="string">&#x27;各国家或地区的电影数量&#x27;</span>, fontsize=<span class="number">20</span>) <span class="comment"># 添加标题</span></span><br><span class="line">plt.xlabel(<span class="string">&#x27;国家或地区&#x27;</span>, fontsize=<span class="number">18</span>)		  <span class="comment"># 设置x轴</span></span><br><span class="line">plt.ylabel(<span class="string">&#x27;电影数量&#x27;</span>, fontsize=<span class="number">18</span>)			   <span class="comment"># 设置y轴</span></span><br><span class="line">plt.tick_params(labelsize=<span class="number">14</span>)				  <span class="comment"># 设置坐标轴字体大小</span></span><br><span class="line">plt.xticks(rotation=<span class="number">90</span>)						  <span class="comment"># 将x轴上的字90°旋转</span></span><br><span class="line"><span class="keyword">for</span> a, b <span class="keyword">in</span> <span class="built_in">zip</span>(x, y):						  <span class="comment"># 在每一个柱上添加文本</span></span><br><span class="line">    plt.text(a, b+<span class="number">10</span>, b, ha=<span class="string">&#x27;center&#x27;</span>, fontsize=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="绘制曲线图"><a href="#绘制曲线图" class="headerlink" title="绘制曲线图"></a>绘制曲线图</h3><p>曲线图又称折线图，是利用曲线的升、降变化来表示被研究对象发展变化趋势的一种图形。它在分析社会经济现象的发展变化、依存关系等方面具有重要作用。</p>
+<p>绘制曲线图时，如果是某一现象的时间指标，应将时间绘在坐标的横轴上。如果是两个现象依存关系的显示，可以将表示原因的指标绘在横轴上，表示结果的指标绘在纵轴上。同时还应注意整个图形的长宽比例。</p>
+<p><strong>绘制每年上映的电影数量曲线图</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">data = df[<span class="string">&#x27;年代&#x27;</span>].value_counts</span><br><span class="line">data = data.sort_index()[:-<span class="number">1</span>]</span><br><span class="line">x = data.index</span><br><span class="line">y = data.values</span><br><span class="line"></span><br><span class="line">plt.plot(x, y, color=<span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;每年电影数量&#x27;</span>, fonsize=<span class="number">20</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;电影数量&#x27;</span>, fonsize=<span class="number">18</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;年份&#x27;</span>, fontsize=<span class="number">18</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> a, b <span class="keyword">in</span> <span class="built_in">zip</span>(x[::<span class="number">10</span>], y[::<span class="number">10</span>]):</span><br><span class="line">    plt.text(a, b+<span class="number">10</span>, b, ha=<span class="string">&#x27;center&#x27;</span>, va=<span class="string">&#x27;bottom&#x27;</span>, fontsize=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">plt.annotate(<span class="string">&#x27;2012取得最大值&#x27;</span>, xy=(<span class="number">2012</span>, data[<span class="number">2012</span>]), xytext=(<span class="number">2025</span>, <span class="number">2100</span>), arrowprops=<span class="built_in">dict</span>(facecolor=<span class="string">&#x27;black&#x27;</span>, edgecolor=<span class="string">&#x27;red&#x27;</span>))</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="绘制饼图"><a href="#绘制饼图" class="headerlink" title="绘制饼图"></a>绘制饼图</h3><p>饼图英文学名为Sector Graph，又名Pie Graph。常用于统计学模块。2D饼图为圆形，手画时，常用圆规作图。</p>
+<p>仅排列在工作表的一列或一行中的数据可以绘制到饼图中。饼图显示一个数据系列 （数据系列：在图表中绘制的相关数据点，这些数据源自数据表的行或列。图表中的每个数据系列具有唯一的颜色或图案并且在图表的图例中表示。可以在图表中绘制一个或多个数据系列。饼图只有一个数据系列。）中各项的大小与各项总和的比例。饼图中的数据点 （数据点：在图表中绘制的单个值，这些值由条形、柱形、折线、饼图或圆环图的扇面、圆点和其他被称为数据标记的图形表示。相同颜色的数据标记组成一个数据系列。）显示为整个饼图的百分比。</p>
+<p><strong>根据电影的长度绘制饼图</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">data = pd.cut(df[<span class="string">&#x27;时长&#x27;</span>], [<span class="number">0</span>, <span class="number">60</span>, <span class="number">90</span>, <span class="number">110</span>, <span class="number">100000</span>]).value_counts()</span><br><span class="line">y = (data.values) / <span class="built_in">sum</span>(data.values)</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">10</span>))</span><br><span class="line">plt.title(<span class="string">&#x27;电影时长占比&#x27;</span>, fontsize=<span class="number">15</span>)</span><br><span class="line">plt.pie(y, labels=data.index, autopct=<span class="string">&#x27;%.1f %%&#x27;</span>, colors=<span class="string">&#x27;bygr&#x27;</span>)</span><br><span class="line">plt.legend()</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="绘制频率分布直方图"><a href="#绘制频率分布直方图" class="headerlink" title="绘制频率分布直方图"></a>绘制频率分布直方图</h3><p>直方图(Histogram)，又称质量分布图，是一种统计报告图，由一系列高度不等的纵向条纹或线段表示数据分布的情况。 一般用横轴表示数据类型，纵轴表示分布情况。</p>
+<p>直方图是数值数据分布的精确图形表示。 这是一个连续变量（定量变量）的概率分布的估计，并且被卡尔·皮尔逊（Karl Pearson）首先引入。它是一种条形图。 为了构建直方图，第一步是将值的范围分段，即将整个值的范围分成一系列间隔，然后计算每个间隔中有多少值。 这些值通常被指定为连续的，不重叠的变量间隔。 间隔必须相邻，并且通常是（但不是必须的）相等的大小。</p>
+<p>直方图也可以被归一化以显示“相对”频率。 然后，它显示了属于几个类别中的每个案例的比例，其高度等于1</p>
+<p><strong>根据电影评分绘制频率分布直方图</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">plt.hist(df[<span class="string">&#x27;评分&#x27;</span>], bins=<span class="number">20</span>, edgecolor=<span class="string">&#x27;k&#x27;</span>, alpha=<span class="number">0.5</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/04/Python-Pandas/" rel="prev" title="Python-Pandas">
+      <i class="fa fa-chevron-left"></i> Python-Pandas
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/02/12/%E7%88%AC%E8%99%AB%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/" rel="next" title="爬虫基本原理">
+      爬虫基本原理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Matplotlib"><span class="nav-number">1.</span> <span class="nav-text">Matplotlib</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Matplotlib%E5%9F%BA%E7%A1%80"><span class="nav-number">1.1.</span> <span class="nav-text">Matplotlib基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#plt-show-%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.1.</span> <span class="nav-text">plt.show()函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#plt-plot-%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.2.</span> <span class="nav-text">plt.plot()函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#plt-setp-%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.3.</span> <span class="nav-text">plt.setp()函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E5%9B%BE"><span class="nav-number">1.1.4.</span> <span class="nav-text">子图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">1.2.</span> <span class="nav-text">数据可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E6%9F%B1%E7%8A%B6%E5%9B%BE"><span class="nav-number">1.2.1.</span> <span class="nav-text">绘制柱状图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E6%9B%B2%E7%BA%BF%E5%9B%BE"><span class="nav-number">1.2.2.</span> <span class="nav-text">绘制曲线图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E9%A5%BC%E5%9B%BE"><span class="nav-number">1.2.3.</span> <span class="nav-text">绘制饼图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E9%A2%91%E7%8E%87%E5%88%86%E5%B8%83%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="nav-number">1.2.4.</span> <span class="nav-text">绘制频率分布直方图</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">林程星</p>
+  <div class="site-description" itemprop="description">‘绳’和‘棒’一样，是人类最早创造的工具之一。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林程星</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">94k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:26</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
