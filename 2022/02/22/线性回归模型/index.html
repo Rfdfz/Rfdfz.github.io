@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220306181054942.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220306181540173.png">
 <meta property="article:published_time" content="2022-02-22T12:10:34.000Z">
-<meta property="article:modified_time" content="2022-03-06T12:30:36.866Z">
+<meta property="article:modified_time" content="2022-03-08T09:41:58.193Z">
 <meta property="article:author" content="林程星">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220223180126139.png">
@@ -197,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-06 20:30:36" itemprop="dateModified" datetime="2022-03-06T20:30:36+08:00">2022-03-06</time>
+                <time title="修改时间：2022-03-08 17:41:58" itemprop="dateModified" datetime="2022-03-08T17:41:58+08:00">2022-03-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -215,14 +215,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.4k</span>
+              <span>6.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>6 分钟</span>
             </span>
 
         </div>
@@ -238,7 +238,7 @@
 <span id="more"></span>
 <h1 id="线性回归模型"><a href="#线性回归模型" class="headerlink" title="线性回归模型"></a>线性回归模型</h1><p>线性回归模型属于监督学习中的回归问题</p>
 <p>在监督学习中，我们有一个数据集，它被称为<strong>训练集(Training Set)</strong></p>
-<h2 id="监督学习的工作原理"><a href="#监督学习的工作原理" class="headerlink" title="监督学习的工作原理"></a>监督学习的工作原理</h2><ol>
+<h2 id="单变量线性回归"><a href="#单变量线性回归" class="headerlink" title="单变量线性回归"></a>单变量线性回归</h2><h3 id="监督学习的工作原理"><a href="#监督学习的工作原理" class="headerlink" title="监督学习的工作原理"></a>监督学习的工作原理</h3><ol>
 <li><p>先向学习算法提供一个训练集</p>
 </li>
 <li><p>算法根据训练集输出一个<strong>假设函数h(hypothesis)</strong></p>
@@ -250,7 +250,7 @@
 h_\theta(x)=\theta_0+\theta_1x</script></li>
 </ol>
 <p>其中<script type="math/tex">\theta_i</script>被称为<strong>模型参数(Parameters)</strong></p>
-<h2 id="代价函数-cost-function"><a href="#代价函数-cost-function" class="headerlink" title="代价函数(cost function)"></a>代价函数(cost function)</h2><h3 id="代价函数的数学定义"><a href="#代价函数的数学定义" class="headerlink" title="代价函数的数学定义"></a>代价函数的数学定义</h3><p>我们要如何使得假设函数能够更好的拟合数据呢？我们要尽可能选择合适的<script type="math/tex">\theta_0</script>和<script type="math/tex">\theta_1</script>使得对于假设函数<script type="math/tex">h_\theta(x)</script>从训练集输入x时所得到的值尽可能接近该样本对应的y值，即<script type="math/tex">h_\theta(x)-y</script>取得极小值</p>
+<h3 id="代价函数-cost-function"><a href="#代价函数-cost-function" class="headerlink" title="代价函数(cost function)"></a>代价函数(cost function)</h3><h4 id="代价函数的数学定义"><a href="#代价函数的数学定义" class="headerlink" title="代价函数的数学定义"></a>代价函数的数学定义</h4><p>我们要如何使得假设函数能够更好的拟合数据呢？我们要尽可能选择合适的<script type="math/tex">\theta_0</script>和<script type="math/tex">\theta_1</script>使得对于假设函数<script type="math/tex">h_\theta(x)</script>从训练集输入x时所得到的值尽可能接近该样本对应的y值，即<script type="math/tex">h_\theta(x)-y</script>取得极小值</p>
 <p>这样就得到预测值和实际值的差的平方误差和公式</p>
 <script type="math/tex; mode=display">
 \frac{1}{2m}\sum_{i=1}^m(h_\theta(x^{(i)})-y^{(i)})^2</script><p>其中<script type="math/tex">m</script>为训练集的样本容量，<script type="math/tex">x^{(i)}</script>与<script type="math/tex">y^{(i)}</script>中的<script type="math/tex">i</script>为序号</p>
@@ -261,7 +261,7 @@ J(\theta_0,\theta_1)=\frac{1}{2m}\sum_{i=1}^m(h_\theta(x^{(i)})-y^{(i)})^2</scri
 <p>我们的优化目标是</p>
 <script type="math/tex; mode=display">
 \mathop{minimize}\limits_{\theta_0,\theta_1}J(\theta_0,\theta_1)</script><p>还有其他的代价函数也能很好的发挥作用，但是但是平方误差代价函数可能是解决回归问题的最常用手段</p>
-<h3 id="如何理解代价函数"><a href="#如何理解代价函数" class="headerlink" title="如何理解代价函数"></a>如何理解代价函数</h3><p>为了更好的使代价函数J可视化，</p>
+<h4 id="如何理解代价函数"><a href="#如何理解代价函数" class="headerlink" title="如何理解代价函数"></a>如何理解代价函数</h4><p>为了更好的使代价函数J可视化，</p>
 <p>我们使用一个简化版的假设函数<script type="math/tex">h_\theta(x)=\theta_1x</script></p>
 <p>此时的代价函数为<script type="math/tex">J(\theta_1)=\frac{1}{2m}\sum_{i=1}^m(h_\theta(x^{(i)})-y^{(i)})^2</script></p>
 <p>此时我们的优化目标为<script type="math/tex">\mathop{minimize}\limits_{\theta_1}J(\theta_1)</script></p>
@@ -269,15 +269,15 @@ J(\theta_0,\theta_1)=\frac{1}{2m}\sum_{i=1}^m(h_\theta(x^{(i)})-y^{(i)})^2</scri
 <p>而代价函数是一个关于<script type="math/tex">\theta_1</script>的函数，因此每一个不同的<script type="math/tex">\theta_1</script>都对应着不同的假设函数，由此可以绘制出代价函数的图像</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220223180126139.png" alt="image-20220223180126139"></p>
 <p>还记得我们学习算法的优化目标吗，是找到通过选择<script type="math/tex">\theta_1</script>找到<script type="math/tex">J(\theta_1)</script>的最小值，对于上图这个特殊的训练集<script type="math/tex">(1,1)(2,2)(3,3)</script>来说最小值<script type="math/tex">\theta_1=1</script>已经完美拟合了它</p>
-<h2 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title="梯度下降法"></a>梯度下降法</h2><p>梯度下降法将用于最小化不同的函数，它不止在线性回归中用到，还会在其它机器学习领域用到</p>
+<h3 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title="梯度下降法"></a>梯度下降法</h3><p>梯度下降法将用于最小化不同的函数，它不止在线性回归中用到，还会在其它机器学习领域用到</p>
 <p>我们有一个函数<script type="math/tex">J(\theta_0,\theta_1)</script>我们要用梯度下降法来求<script type="math/tex">\mathop{min}\limits_{\theta_0,\theta_1}J(\theta_0,\theta_1)</script></p>
 <p>思路：一般先设<script type="math/tex">\theta_0=0，\theta_1=0</script>，接下来不停的一点点改变<script type="math/tex">\theta_0，\theta_1</script>使得<script type="math/tex">J(\theta_0,\theta_1)</script>变小，直到我们找到<script type="math/tex">J(\theta_0,\theta_1)</script>的最小值或局部最小值</p>
-<h3 id="梯度下降算法的数学定义"><a href="#梯度下降算法的数学定义" class="headerlink" title="梯度下降算法的数学定义"></a>梯度下降算法的数学定义</h3><script type="math/tex; mode=display">
+<h4 id="梯度下降算法的数学定义"><a href="#梯度下降算法的数学定义" class="headerlink" title="梯度下降算法的数学定义"></a>梯度下降算法的数学定义</h4><script type="math/tex; mode=display">
 \rm{repeat}\;\rm{until}\;\rm{convergence}\;\{\\\theta_j:=\theta_j-\alpha\frac{\partial}{\partial\theta_j}J(\theta_0,\theta_1)\;\;\;(\rm{for}\;j=0\;\rm{and}\;j=1)\;\}</script><ul>
 <li><script type="math/tex">:=</script>为计算机中的赋值操作</li>
 <li><script type="math/tex">\alpha</script>为<strong>学习率(learning rate)</strong>，用于控制梯度下降时的速度</li>
 </ul>
-<h3 id="同步更新"><a href="#同步更新" class="headerlink" title="同步更新"></a>同步更新</h3><p><strong>正确的实现方法</strong></p>
+<h4 id="同步更新"><a href="#同步更新" class="headerlink" title="同步更新"></a>同步更新</h4><p><strong>正确的实现方法</strong></p>
 <ol>
 <li><script type="math/tex; mode=display">\rm{temp0}:=\theta_0-\alpha\frac{\partial}{\partial\theta_j}J(\theta_0,\theta_1)</script></li>
 <li><script type="math/tex; mode=display">\rm{temp1}:=\theta_1-\alpha\frac{\partial}{\partial\theta_j}J(\theta_0,\theta_1)</script></li>
@@ -292,12 +292,12 @@ J(\theta_0,\theta_1)=\frac{1}{2m}\sum_{i=1}^m(h_\theta(x^{(i)})-y^{(i)})^2</scri
 <li><script type="math/tex; mode=display">\theta_1:=\rm{temp1}</script></li>
 </ol>
 <p>如果这样先执行第2步，则第三步中的导数项将会使用新的<script type="math/tex">\theta_0</script>来计算</p>
-<h3 id="如何理解梯度下降法"><a href="#如何理解梯度下降法" class="headerlink" title="如何理解梯度下降法"></a>如何理解梯度下降法</h3><p>先来看看导数部分，假设我们有个简化版的代价函数<script type="math/tex">J(\theta_1)</script>，此时梯度下降法中的导数项将变为<script type="math/tex">\alpha\frac{d}{d\theta_1}J(\theta_1)</script>，其中的<script type="math/tex">\alpha</script>永远是正数，若<script type="math/tex">J(\theta_1)</script>有正导数，则<script type="math/tex">\theta_1</script>将不断变小，若<script type="math/tex">J(\theta_1)</script>有负导数，则<script type="math/tex">\theta_1</script>将不断变大，得到的结果是函数值不断逼近极小值</p>
+<h4 id="如何理解梯度下降法"><a href="#如何理解梯度下降法" class="headerlink" title="如何理解梯度下降法"></a>如何理解梯度下降法</h4><p>先来看看导数部分，假设我们有个简化版的代价函数<script type="math/tex">J(\theta_1)</script>，此时梯度下降法中的导数项将变为<script type="math/tex">\alpha\frac{d}{d\theta_1}J(\theta_1)</script>，其中的<script type="math/tex">\alpha</script>永远是正数，若<script type="math/tex">J(\theta_1)</script>有正导数，则<script type="math/tex">\theta_1</script>将不断变小，若<script type="math/tex">J(\theta_1)</script>有负导数，则<script type="math/tex">\theta_1</script>将不断变大，得到的结果是函数值不断逼近极小值</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220224212030053.png" alt=""></p>
 <p>再来看看学习率的作用，如果学习率<script type="math/tex">\alpha</script>太小，结果就是函数值只能一点一点的挪动需要很多步才能到达全局最低点，那如果学习率<script type="math/tex">\alpha</script>太大，那么梯度下降就有可能会越过最低点，甚至可能无法收敛或发散</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220224212639223.png" alt="image-20220224212639223">在梯度下降法中，当我们接近局部最低点时，梯度下降法将会自动采取更小的幅度，这是因为我们越接近局部最低点，在该点处的导数值越小</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220224213434009.png" alt="image-20220224213434009"></p>
-<h2 id="最小化平方差代价函数"><a href="#最小化平方差代价函数" class="headerlink" title="最小化平方差代价函数"></a>最小化平方差代价函数</h2><p>为了应用梯度下降法，关键的是导数项，我们将导数项化简</p>
+<h4 id="最小化平方差代价函数"><a href="#最小化平方差代价函数" class="headerlink" title="最小化平方差代价函数"></a>最小化平方差代价函数</h4><p>为了应用梯度下降法，关键的是导数项，我们将导数项化简</p>
 <script type="math/tex; mode=display">
 \frac{\partial}{\partial\theta_j}J(\theta_0,\theta_1)=\frac{\partial}{\partial\theta_j}\cdot\frac{1}{2m}\sum_{i=1}^m(h_\theta(x^{(i)})-y^{(i)})^2=\frac{\partial}{\partial\theta_j}\cdot\frac{1}{2m}\sum_{i=1}^m(\theta_0+\theta_1x^{(i)}-y^{(i)})^2</script><p>接下来求偏导</p>
 <script type="math/tex; mode=display">
@@ -307,6 +307,25 @@ j=0:\frac{\partial}{\partial\theta_0}J(\theta_0,\theta_1)=\frac{1}{m}\sum_{i=1}^
 <p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220306181054942.png" alt="image-20220306181054942"></p>
 <p>根据参数的不同初始值，梯度下降法会获得不同的极小值。然而，对于线性回归的代价函数来说，他的图像总是一个弓状函数（凹函数）。因此，它只有一个全局最优解。<strong>由此只要对线性回归的代价函数使用梯度下降法，它总是会收敛到全局最优</strong></p>
 <p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220306181540173.png" alt="image-20220306181540173"></p>
+<h2 id="多变量线性回归"><a href="#多变量线性回归" class="headerlink" title="多变量线性回归"></a>多变量线性回归</h2><p>之前我们学习了只有单一特征量的线性回归。假如，我们不只有一个特征量，而是有许多的特征量<script type="math/tex">x_1,x_2,...,x_n</script>，那么我们就要用到多变量线性回归</p>
+<h3 id="假设函数"><a href="#假设函数" class="headerlink" title="假设函数"></a>假设函数</h3><p>多变量线性回归的<strong>假设函数</strong>为<script type="math/tex">h_\theta(x)=\theta_0+\theta_1x_1+\theta_2x_2+...+\theta_nx_n</script></p>
+<p>为了标识方便我们要将<strong><script type="math/tex">x_0</script>的值设为1</strong>，这意味着对于第<script type="math/tex">i</script>个样本来说，有一个向量<script type="math/tex">x^{(i)}_0=1</script>，这样我们从有n个特征量变成了有n+1个特征量，由此<script type="math/tex">x=\begin{bmatrix}x_0\\x_1\\x_2\\\vdots\\x_n\end{bmatrix}\in\Re^{n+1}</script>，<script type="math/tex">\theta=\begin{bmatrix}\theta_0\\\theta_1\\\theta_2\\\vdots\\\theta_n\end{bmatrix}\in\Re^{n+1}</script>，则上述假设函数满足：</p>
+<script type="math/tex; mode=display">
+h_\theta(x)=\theta_0+\theta_1x_1+\theta_2x_2+...+\theta_nx_n=h_\theta(x)=\theta_0x_0+\theta_1x_1+\theta_2x_2+...+\theta_nx_n=\theta^Tx\\h_\theta(x)=\theta^Tx</script><h3 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h3><p>我们不把<script type="math/tex">\theta_0,\theta_1,\cdots\theta_n</script>看成n+1个参数，而是把它们看作<script type="math/tex">\theta</script>这样一个n+1维向量</p>
+<p>得出代价函数</p>
+<script type="math/tex; mode=display">
+J(\theta)=\frac{1}{2m}\sum_{i=1}^m(h_\theta(x^{(i)})-y^{(i)})^2</script><h3 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h3><p>多变量线性回归的梯度下降函数</p>
+<script type="math/tex; mode=display">
+\rm{Repeat}\ \{ \\\theta_j:=\theta_j-\alpha\frac{\partial}{\partial\theta_j}J(\theta)\ \}\\</script><script type="math/tex; mode=display">
+\rm{Repeat}\ \{\\\theta_j:=\theta_j-\alpha\frac{1}{m}\sum_{i=1}^m(h_{\theta}(x^{(i)})-y^{(i)})\cdot x^{(i)}_j\ \}</script><h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><h3 id="单变量线性回归-1"><a href="#单变量线性回归-1" class="headerlink" title="单变量线性回归"></a>单变量线性回归</h3><h4 id="向量化"><a href="#向量化" class="headerlink" title="向量化"></a>向量化</h4><p>我们知道单变量线性回归的代价函数表达式：</p>
+<script type="math/tex; mode=display">
+J(\theta_0,\theta_1)=\frac{1}{2m}\sum_{i=1}^m(h_\theta(x^{(i)})-y^{(i)})^2</script><p>设<script type="math/tex">\Theta=\begin{bmatrix}\theta_0\\\theta_1\end{bmatrix}，X=\begin{bmatrix}1\ x^{(1)}\\1\ x^{(2)}\\\vdots\\1\ x^{(m)}\end{bmatrix}，y=\begin{bmatrix}y^{(1)}\\y^{(2)}\\\vdots\\y^{(m)}\end{bmatrix}</script>，则上式可化简为</p>
+<script type="math/tex; mode=display">
+J(\theta)=\frac{1}{2m}\sum^m_{i=1}(X\cdot\Theta-y)^2</script><p>而我们知道其梯度下降函数的表达式：</p>
+<script type="math/tex; mode=display">
+\rm{repeat}\ \rm{until}\ \rm{convergence}\ \{\\\theta_0:=\theta_0-\alpha\frac{1}{m}\sum_{i=1}^m(h_{\theta}(x^{(i)})-y^{(i)})\\\theta_1:=\theta_1-\alpha\frac{1}{m}\sum_{i=1}^m(h_{\theta}(x^{(i)})-y^{(i)})\cdot x^{(i)}\ \}</script><p>我们引入一个新的参数<script type="math/tex">\delta=\begin{bmatrix}\frac{1}{m}\sum^m_{i=1}h_{\theta}(x^{(i)})-y^{(i)}\cdot x_0^{(i)}\\\frac{1}{m}\sum^m_{i=1}h_{\theta}(x^{(i)})-y^{(i)})\cdot x^{(i)}_1\end{bmatrix}=\frac{1}{m}\cdot(X\cdot\Theta-y)\left[\begin{array}{cccc}1&1&1&\cdots&1\\x_1^{(1)}&x_1^{(2)}&x_1^{(3)}&\cdots&x_1^{(m)}\end{array}\right]=\frac{1}{m}X^T\cdot(X\cdot\Theta-y)</script>，而上述方程可写作<script type="math/tex">\Theta=\Theta-\alpha\delta</script>，则可化简为</p>
+<script type="math/tex; mode=display">
+\rm{repeat}\ \rm{until}\ \rm{convergence}\ \{\\\Theta=\Theta-\alpha\frac{1}{m}X^T(X\Theta-y)\}</script><h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据读取</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dataLoad</span>(<span class="params">path</span>):</span></span><br><span class="line">    m_data = pd.read_csv(path, names=[<span class="string">&#x27;Population&#x27;</span>, <span class="string">&#x27;Profit&#x27;</span>])</span><br><span class="line">    <span class="keyword">return</span> m_data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建代价函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">costFunction</span>(<span class="params">theta, X, y</span>):</span></span><br><span class="line">    inner = np.power(np.dot(X, theta) - y, <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> np.<span class="built_in">sum</span>(inner) / (<span class="number">2</span> * <span class="built_in">len</span>(X))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 梯度下降</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gradientDescent</span>(<span class="params">X, y, theta, alpha, iters</span>):</span></span><br><span class="line">    costs = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(iters):</span><br><span class="line">        cost = costFunction(theta, X, y)</span><br><span class="line">        theta = theta - (np.dot(X.T, (np.dot(X, theta) - y))) * alpha / <span class="built_in">len</span>(X)</span><br><span class="line">        costs.append(cost)</span><br><span class="line">    <span class="keyword">return</span> theta, costs</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据初始化</span></span><br><span class="line">data = dataLoad(<span class="string">&#x27;ex1data1.txt&#x27;</span>)</span><br><span class="line">data.insert(<span class="number">0</span>, <span class="string">&#x27;Ones&#x27;</span>, <span class="number">1</span>)</span><br><span class="line">X = data.iloc[:, :-<span class="number">1</span>].values</span><br><span class="line">y = data.iloc[:, -<span class="number">1</span>].values</span><br><span class="line">y = y.reshape(<span class="number">97</span>, <span class="number">1</span>)</span><br><span class="line">theta = np.zeros((<span class="number">2</span>, <span class="number">1</span>))</span><br><span class="line">alpha = <span class="number">0.02</span></span><br><span class="line">iters = <span class="number">10000</span></span><br><span class="line">theta, costs = gradientDescent(X, y, theta, alpha, iters)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;theta:\n<span class="subst">&#123;theta[<span class="number">0</span>], theta[<span class="number">1</span>]&#125;</span>\n&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;cost in each iters:&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> cost <span class="keyword">in</span> costs:</span><br><span class="line">    <span class="built_in">print</span>(cost)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -384,7 +403,7 @@ j=0:\frac{\partial}{\partial\theta_0}J(\theta_0,\theta_1)=\frac{1}{m}\sum_{i=1}^
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">线性回归模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">监督学习的工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0-cost-function"><span class="nav-number">1.2.</span> <span class="nav-text">代价函数(cost function)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%E7%9A%84%E6%95%B0%E5%AD%A6%E5%AE%9A%E4%B9%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">代价函数的数学定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.2.</span> <span class="nav-text">如何理解代价函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">梯度下降法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%95%B0%E5%AD%A6%E5%AE%9A%E4%B9%89"><span class="nav-number">1.3.1.</span> <span class="nav-text">梯度下降算法的数学定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0"><span class="nav-number">1.3.2.</span> <span class="nav-text">同步更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95"><span class="nav-number">1.3.3.</span> <span class="nav-text">如何理解梯度下降法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E5%8C%96%E5%B9%B3%E6%96%B9%E5%B7%AE%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0"><span class="nav-number">1.4.</span> <span class="nav-text">最小化平方差代价函数</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">线性回归模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E5%8F%98%E9%87%8F%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-number">1.1.</span> <span class="nav-text">单变量线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.1.</span> <span class="nav-text">监督学习的工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0-cost-function"><span class="nav-number">1.1.2.</span> <span class="nav-text">代价函数(cost function)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0%E7%9A%84%E6%95%B0%E5%AD%A6%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">代价函数的数学定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">如何理解代价函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95"><span class="nav-number">1.1.3.</span> <span class="nav-text">梯度下降法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E7%AE%97%E6%B3%95%E7%9A%84%E6%95%B0%E5%AD%A6%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">梯度下降算法的数学定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E6%9B%B4%E6%96%B0"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">同步更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">如何理解梯度下降法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E5%8C%96%E5%B9%B3%E6%96%B9%E5%B7%AE%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">最小化平方差代价函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E5%8F%98%E9%87%8F%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-number">1.2.</span> <span class="nav-text">多变量线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%87%E8%AE%BE%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.1.</span> <span class="nav-text">假设函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.2.</span> <span class="nav-text">代价函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D"><span class="nav-number">1.2.3.</span> <span class="nav-text">梯度下降</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.3.</span> <span class="nav-text">代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E5%8F%98%E9%87%8F%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">单变量线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E5%8C%96"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">向量化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -442,13 +461,13 @@ j=0:\frac{\partial}{\partial\theta_0}J(\theta_0,\theta_1)=\frac{1}{m}\sum_{i=1}^
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">97k</span>
+    <span title="站点总字数">100k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:29</span>
+    <span title="站点阅读时长">1:31</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
