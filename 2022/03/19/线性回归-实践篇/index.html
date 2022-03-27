@@ -25,24 +25,19 @@
 <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
 <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
 
-  <meta name="description" content="数据预处理是数据分析的必备环节，在进行分析过程中，会有很多不符合分析要求的数据，例如重复、错误、缺失、异常类数据。">
+  <meta name="description" content="线性回归模型属于监督学习中的回归问题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据预处理">
-<meta property="og:url" content="http://example.com/2022/03/18/%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86/index.html">
+<meta property="og:title" content="线性回归-实践篇">
+<meta property="og:url" content="http://example.com/2022/03/19/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92-%E5%AE%9E%E8%B7%B5%E7%AF%87/index.html">
 <meta property="og:site_name" content="Please Lamp The Star">
-<meta property="og:description" content="数据预处理是数据分析的必备环节，在进行分析过程中，会有很多不符合分析要求的数据，例如重复、错误、缺失、异常类数据。">
+<meta property="og:description" content="线性回归模型属于监督学习中的回归问题">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220309100414308.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220318125548732.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220318232725050.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220319002046146.png">
-<meta property="article:published_time" content="2022-03-18T03:31:40.000Z">
-<meta property="article:modified_time" content="2022-03-23T09:00:14.086Z">
+<meta property="article:published_time" content="2022-03-19T01:57:17.000Z">
+<meta property="article:modified_time" content="2022-03-24T09:26:08.020Z">
 <meta property="article:author" content="林程星">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220309100414308.png">
 
-<link rel="canonical" href="http://example.com/2022/03/18/%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86/">
+<link rel="canonical" href="http://example.com/2022/03/19/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92-%E5%AE%9E%E8%B7%B5%E7%AF%87/">
 
 
 <script id="page-configurations">
@@ -55,7 +50,7 @@
   };
 </script>
 
-  <title>数据预处理 | Please Lamp The Star</title>
+  <title>线性回归-实践篇 | Please Lamp The Star</title>
   
 
 
@@ -165,7 +160,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/18/%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/19/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92-%E5%AE%9E%E8%B7%B5%E7%AF%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -178,7 +173,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          数据预处理
+          线性回归-实践篇
         </h1>
 
         <div class="post-meta">
@@ -188,14 +183,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-03-18 11:31:40" itemprop="dateCreated datePublished" datetime="2022-03-18T11:31:40+08:00">2022-03-18</time>
+              <time title="创建时间：2022-03-19 09:57:17" itemprop="dateCreated datePublished" datetime="2022-03-19T09:57:17+08:00">2022-03-19</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-23 17:00:14" itemprop="dateModified" datetime="2022-03-23T17:00:14+08:00">2022-03-23</time>
+                <time title="修改时间：2022-03-24 17:26:08" itemprop="dateModified" datetime="2022-03-24T17:26:08+08:00">2022-03-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -203,7 +198,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" itemprop="url" rel="index"><span itemprop="name">数据分析</span></a>
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
                 </span>
             </span>
 
@@ -213,14 +208,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.1k</span>
+              <span>2.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -232,29 +227,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>数据预处理是数据分析的必备环节，在进行分析过程中，会有很多不符合分析要求的数据，例如重复、错误、缺失、异常类数据。</p>
+        <p>线性回归模型属于监督学习中的回归问题</p>
 <span id="more"></span>
-<h1 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h1><h2 id="特征归一化、标准化"><a href="#特征归一化、标准化" class="headerlink" title="特征归一化、标准化"></a>特征归一化、标准化</h2><p>为什么要进行特征的归一化、标准化？因为在处理多维特征问题时，不同特征间的尺度不同，例：假设有两个特征，房屋的数量和房屋的面积，房屋的面积<script type="math/tex">\in[0,2000]</script>而房屋的数量<script type="math/tex">\in[0,5]</script>，我们以这两个特征分别为横纵坐标绘制代价函数的等高线图，图如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220309100414308.png" alt="image-20220309100414308" style="zoom:50%;" /></p>
-<p>  由图像我们可以看出来，梯度下降算法需要非常多次的迭代才能够收敛，因此我们进行特征的归一化、标准化</p>
-<h2 id="重复值处理"><a href="#重复值处理" class="headerlink" title="重复值处理"></a>重复值处理</h2><p>在我们获取到一个数据集之后，我们可能会发现有部分不应该重复的数据（如学号、身份证号等）出现重复，这时候我们就需要对这些重复值进行处理</p>
-<p><code>df.duplicated(col)</code>：通过该方法可以查看数据是否重复，参数填入列名称还可以查看某列数据是否有重复</p>
-<p><code>df.drop_duplicates(col)</code>：通过该方法可以<strong>直接删除</strong>重复值，这是重复值处理的最主要的方法</p>
-<h2 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h2><h3 id="缺失值查看"><a href="#缺失值查看" class="headerlink" title="缺失值查看"></a>缺失值查看</h3><p>一个数据集中，我们可能会发现许多缺失值</p>
-<p><code>df.isnull().sum()</code>：这条指令可以给出缺失值的数量</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = pd.read_csv(<span class="string">&#x27;l2_week2.csv&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(data.isnull().<span class="built_in">sum</span>())</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220318125548732.png" alt="image-20220318125548732"></p>
-<h3 id="缺失值填补"><a href="#缺失值填补" class="headerlink" title="缺失值填补"></a>缺失值填补</h3><p>接下来我们要对缺失值进行填补</p>
-<p><code>df.fillna(value)</code>：我们传入要填补的值即可对缺失值进行填补</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data[<span class="string">&#x27;age&#x27;</span>] = data[<span class="string">&#x27;age&#x27;</span>].fillna(<span class="built_in">int</span>(data[<span class="string">&#x27;age&#x27;</span>].mean()))</span><br><span class="line"><span class="built_in">print</span>(data.head())</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220318232725050.png" alt="image-20220318232725050"></p>
-<p>这样就成功填补了缺失的特征值</p>
-<h2 id="异常值处理"><a href="#异常值处理" class="headerlink" title="异常值处理"></a>异常值处理</h2><p>首先我们可以根据常识进行判断，如年龄为负值等情况</p>
-<p>其次我们可以使用<strong>3σ原则</strong>，也就是平均数三个标准差以外的数据被视作异常值</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(data[<span class="string">&#x27;revenue&#x27;</span>]))</span><br><span class="line">error_revenue = <span class="number">3</span> * data[<span class="string">&#x27;revenue&#x27;</span>].std()</span><br><span class="line">data = data[(data[<span class="string">&#x27;revenue&#x27;</span>] &gt; data[<span class="string">&#x27;revenue&#x27;</span>].mean() - error_revenue) &amp; (data[<span class="string">&#x27;revenue&#x27;</span>] &lt; data[<span class="string">&#x27;revenue&#x27;</span>].mean() + error_revenue)]</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(data[<span class="string">&#x27;revenue&#x27;</span>]))</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220319002046146.png" alt="image-20220319002046146" style="zoom:150%;" /></p>
-<p>这里我们删除了153条异常数据</p>
-<h2 id="字符数字化"><a href="#字符数字化" class="headerlink" title="字符数字化"></a>字符数字化</h2><h3 id="独热编码-one-hot-code"><a href="#独热编码-one-hot-code" class="headerlink" title="独热编码(one-hot code)"></a>独热编码(one-hot code)</h3>
+<h1 id="线性回归-实践篇"><a href="#线性回归-实践篇" class="headerlink" title="线性回归-实践篇"></a>线性回归-实践篇</h1><h2 id="正规方程法"><a href="#正规方程法" class="headerlink" title="正规方程法"></a>正规方程法</h2><h3 id="公式推导"><a href="#公式推导" class="headerlink" title="公式推导"></a>公式推导</h3><p>假设我们的数据集为<script type="math/tex">D=\{(x_1,y_1),(x_2,y_2),\cdots,(x_N,y_N)\}</script></p>
+<p>其中的<script type="math/tex">x_i\in\mathbb R^p，y_i\in\mathbb R，i=1,2,\cdots,N</script></p>
+<p>接着我们引入<script type="math/tex">X=\begin{pmatrix}x_1&x_2&\cdots &x_N\end{pmatrix}^T=\begin{pmatrix}x_1^T\\x_2^T\\\vdots\\ x_N^T\\\end{pmatrix}=\begin{pmatrix}x_{11}&x_{12}&\cdots&x_{1p}\\x_{21}&x_{22}&\cdots&x_{2p}\\\vdots&\vdots&&\vdots\\x_{N1}&x_{N2}&\cdots&x_{Np}\end{pmatrix}_{N\times p}</script>，<script type="math/tex">y=\begin{pmatrix}y_1\\y_2\\\vdots\\y_N\end{pmatrix}_{N\times 1}</script></p>
+<p>我们需要预测的方程，也就是<strong>假设函数</strong>为<script type="math/tex">f(\theta)=\theta^Tx</script>，其中<script type="math/tex">\theta=\begin{pmatrix}\theta_0\\\theta_1\\\vdots\\\theta_p\end{pmatrix}</script></p>
+<p>我们需要一个<strong>代价函数</strong></p>
+<script type="math/tex; mode=display">
+\begin{align}L(\theta)&=\sum^N_{i=1}\left|\theta^Tx_i-y_i\right|^2\\&=\sum^N_{i=1}(\theta^Tx_i-y_i)^2\\&=\begin{pmatrix}\theta^Tx_1-y_1&\theta^Tx_2-y_2&\cdots&\theta^Tx_N-y_N\end{pmatrix}\begin{pmatrix}\theta^Tx_1-y_1\\\theta^Tx_2-y_2\\\vdots\\\\\theta^Tx_N-y_N\end{pmatrix}\\&=\theta^T\begin{pmatrix}x_1&x_2&\cdots&x_N\end{pmatrix}-\begin{pmatrix}y_1&y_2&\cdots&y_N\end{pmatrix}\begin{pmatrix}\theta^Tx_1-y_1\\\theta^Tx_2-y_2\\\vdots\\\\\theta^Tx_N-y_N\end{pmatrix}\\&=(\theta^TX^T-Y^T)(X\theta-Y)\\&=\theta^TX^TX\theta-2\theta^TX^TY+Y^TY\end{align}</script><p>于是我们所要求的估计值为<script type="math/tex">\hat \theta=argmin\ L(\theta)</script></p>
+<p>我们对<script type="math/tex">L(\theta)</script>求关于<script type="math/tex">\theta</script>的偏导</p>
+<script type="math/tex; mode=display">
+\frac{\partial L(\theta)}{\partial \theta}=2X^TX\theta-2X^TY=0\\X^TX\theta=X^TY\\\theta=(X^TX)^{-1}X^TY</script><p>其中<script type="math/tex">(X^TX)^{-1}X^T</script>也被称为伪逆，用符号<script type="math/tex">X^+</script>来表示</p>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">X = data.iloc[:, <span class="number">1</span>:]</span><br><span class="line">X.insert(<span class="number">0</span>, <span class="string">&quot;Ones&quot;</span>, <span class="number">1</span>)</span><br><span class="line">X = X.values</span><br><span class="line">Y = data.iloc[:, <span class="number">0</span>].values.reshape(<span class="built_in">len</span>(X), <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 最小二乘法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Ordinary_Least_Squares</span>(<span class="params">X, Y</span>):</span></span><br><span class="line">    <span class="keyword">return</span> np.dot(np.dot(np.linalg.inv(np.dot(X.T, X)), X.T), Y)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">theta = Ordinary_Least_Squares(X, Y)</span><br><span class="line">theta = np.array(theta)</span><br><span class="line">y_hat = np.dot(theta.T, X.T)</span><br></pre></td></tr></table></figure>
+<h2 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title="梯度下降法"></a>梯度下降法</h2><h3 id="公式推导-1"><a href="#公式推导-1" class="headerlink" title="公式推导"></a>公式推导</h3><p>本部分假设内容与正规方程法公式推导部分假设相同</p>
+<p>我们有<strong>代价函数</strong></p>
+<script type="math/tex; mode=display">
+\begin{align}J(\theta)&=\frac{1}{2m}\sum^m_{i=1}(f(\theta)-y)^2\\&=\frac{1}{2m}\sum^m_{i=1}(X\cdot\theta-y)^2\\\end{align}</script><p>而我们由<strong>梯度下降</strong>的表达式</p>
+<script type="math/tex; mode=display">
+\begin{align}\theta_0&:=\theta_0-\alpha\frac{1}{m}\sum^m_{i=1}(X\cdot\theta-y)\cdot x_0\\\theta_1&:=\theta_1-\alpha\frac{1}{m}\sum^m_{i=1}(X\cdot\theta-y)\cdot x_1\\&\ \ \ \vdots\\\theta_j&:=\theta_j-\alpha\frac{1}{m}\sum^m_{i=1}(X\cdot\theta-y)\cdot x_j\end{align}</script><p>我们引入一个新的参数<script type="math/tex">\delta=\begin{bmatrix}\frac{1}{m}\sum^m_{i=1}h_{\theta}(x^{(i)})-y^{(i)}\cdot x_0^{(i)}\\\frac{1}{m}\sum^m_{i=1}h_{\theta}(x^{(i)})-y^{(i)})\cdot x^{(i)}_1\\\vdots\\\frac{1}{m}\sum^m_{i=1}h_{\theta}(x^{(i)})-y^{(i)}\cdot x_m^{(i)}\end{bmatrix}=\frac{1}{m}\cdot(X\cdot\Theta-y)\left[\begin{array}{cccc}1&1&1&\cdots&1\\x_1^{(1)}&x_1^{(2)}&x_1^{(3)}&\cdots&x_1^{(m)}\\\vdots&\vdots&\vdots&&\vdots\\x_j^{(1)}&x_j^{(2)}&x_j^{(3)}&\cdots&x_j^{(m)}\end{array}\right]=\frac{1}{m}X^T\cdot(X\cdot\Theta-y)</script>，而上述方程可写作<script type="math/tex">\Theta=\Theta-\alpha\delta</script>，则可化简为</p>
+<script type="math/tex; mode=display">
+\Theta=\Theta-\alpha\frac{1}{m}X^T(X\Theta-y)</script><h3 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">costFunction</span>(<span class="params">X, y, theta</span>):</span></span><br><span class="line">    inner = np.power(np.dot(X, theta) - Y, <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">return</span> np.<span class="built_in">sum</span>(inner) / (<span class="number">2</span> * <span class="built_in">len</span>(X))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GradientDescent</span>(<span class="params">X, y, theta, alpha, iters</span>):</span></span><br><span class="line">	costs = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(iters):</span><br><span class="line">		cost = costFunction()</span><br><span class="line">		theta = theta - (np.dot(X.T, (np.dot(X, theta) - Y))) * alpha / <span class="built_in">len</span>(X)</span><br><span class="line">	costs.append(cost)</span><br><span class="line">	<span class="keyword">return</span> theta costs</span><br></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -269,12 +263,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/02/22/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92-%E7%90%86%E8%AE%BA%E7%AF%87/" rel="prev" title="线性回归-理论篇">
-      <i class="fa fa-chevron-left"></i> 线性回归-理论篇
+    <a href="/2022/03/18/%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86/" rel="prev" title="数据预处理">
+      <i class="fa fa-chevron-left"></i> 数据预处理
     </a></div>
       <div class="post-nav-item">
-    <a href="/2022/03/19/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92-%E5%AE%9E%E8%B7%B5%E7%AF%87/" rel="next" title="线性回归-实践篇">
-      线性回归-实践篇 <i class="fa fa-chevron-right"></i>
+    <a href="/2022/03/24/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92-%E7%90%86%E8%AE%BA%E7%AF%87/" rel="next" title="逻辑回归-理论篇">
+      逻辑回归-理论篇 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -334,7 +328,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">数据预处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E5%BD%92%E4%B8%80%E5%8C%96%E3%80%81%E6%A0%87%E5%87%86%E5%8C%96"><span class="nav-number">1.1.</span> <span class="nav-text">特征归一化、标准化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%8D%E5%80%BC%E5%A4%84%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">重复值处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E5%A4%B1%E5%80%BC%E5%A4%84%E7%90%86"><span class="nav-number">1.3.</span> <span class="nav-text">缺失值处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E5%A4%B1%E5%80%BC%E6%9F%A5%E7%9C%8B"><span class="nav-number">1.3.1.</span> <span class="nav-text">缺失值查看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E5%A4%B1%E5%80%BC%E5%A1%AB%E8%A1%A5"><span class="nav-number">1.3.2.</span> <span class="nav-text">缺失值填补</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%80%BC%E5%A4%84%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">异常值处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E6%95%B0%E5%AD%97%E5%8C%96"><span class="nav-number">1.5.</span> <span class="nav-text">字符数字化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8B%AC%E7%83%AD%E7%BC%96%E7%A0%81-one-hot-code"><span class="nav-number">1.5.1.</span> <span class="nav-text">独热编码(one-hot code)</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92-%E5%AE%9E%E8%B7%B5%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">线性回归-实践篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E8%A7%84%E6%96%B9%E7%A8%8B%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">正规方程法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC"><span class="nav-number">1.1.1.</span> <span class="nav-text">公式推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.1.2.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">梯度下降法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">公式推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">代码实现</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
