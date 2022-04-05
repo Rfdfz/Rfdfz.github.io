@@ -35,9 +35,10 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220309100414308.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220318125548732.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220318232725050.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220319002046146.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220403133344740.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220403133617558.png">
 <meta property="article:published_time" content="2022-03-18T03:31:40.000Z">
-<meta property="article:modified_time" content="2022-03-23T09:00:14.086Z">
+<meta property="article:modified_time" content="2022-04-03T05:43:43.474Z">
 <meta property="article:author" content="林程星">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220309100414308.png">
@@ -195,7 +196,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-23 17:00:14" itemprop="dateModified" datetime="2022-03-23T17:00:14+08:00">2022-03-23</time>
+                <time title="修改时间：2022-04-03 13:43:43" itemprop="dateModified" datetime="2022-04-03T13:43:43+08:00">2022-04-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -213,7 +214,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.1k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -234,10 +235,15 @@
       
         <p>数据预处理是数据分析的必备环节，在进行分析过程中，会有很多不符合分析要求的数据，例如重复、错误、缺失、异常类数据。</p>
 <span id="more"></span>
-<h1 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h1><h2 id="特征归一化、标准化"><a href="#特征归一化、标准化" class="headerlink" title="特征归一化、标准化"></a>特征归一化、标准化</h2><p>为什么要进行特征的归一化、标准化？因为在处理多维特征问题时，不同特征间的尺度不同，例：假设有两个特征，房屋的数量和房屋的面积，房屋的面积<script type="math/tex">\in[0,2000]</script>而房屋的数量<script type="math/tex">\in[0,5]</script>，我们以这两个特征分别为横纵坐标绘制代价函数的等高线图，图如下：</p>
+<h1 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h1><h2 id="特征放缩"><a href="#特征放缩" class="headerlink" title="特征放缩"></a>特征放缩</h2><p>为什么要进行特征的归一化、标准化？因为在处理多维特征问题时，不同特征间的尺度不同，例：假设有两个特征，房屋的数量和房屋的面积，房屋的面积<script type="math/tex">\in[0,2000]</script>而房屋的数量<script type="math/tex">\in[0,5]</script>，我们以这两个特征分别为横纵坐标绘制代价函数的等高线图，图如下：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220309100414308.png" alt="image-20220309100414308" style="zoom:50%;" /></p>
-<p>  由图像我们可以看出来，梯度下降算法需要非常多次的迭代才能够收敛，因此我们进行特征的归一化、标准化</p>
-<h2 id="重复值处理"><a href="#重复值处理" class="headerlink" title="重复值处理"></a>重复值处理</h2><p>在我们获取到一个数据集之后，我们可能会发现有部分不应该重复的数据（如学号、身份证号等）出现重复，这时候我们就需要对这些重复值进行处理</p>
+<p>由图像我们可以看出来，梯度下降算法需要非常多次的迭代才能够收敛，因此我们进行特征的归一化、标准化</p>
+<p>以下实际中常用的放缩方法：</p>
+<p><strong>min-max归一化</strong>：将取值范围放缩到<script type="math/tex">[0,1]</script></p>
+<script type="math/tex; mode=display">
+x'=\frac{x-min(x)}{max(x)-min(x)}</script><p><strong>标准化</strong>：将数据放缩到0附近，且使其满足均值为0，标准差为1的正态分布</p>
+<script type="math/tex; mode=display">
+x'=\frac{x-\bar x}{\sigma}</script><h2 id="重复值处理"><a href="#重复值处理" class="headerlink" title="重复值处理"></a>重复值处理</h2><p>在我们获取到一个数据集之后，我们可能会发现有部分不应该重复的数据（如学号、身份证号等）出现重复，这时候我们就需要对这些重复值进行处理</p>
 <p><code>df.duplicated(col)</code>：通过该方法可以查看数据是否重复，参数填入列名称还可以查看某列数据是否有重复</p>
 <p><code>df.drop_duplicates(col)</code>：通过该方法可以<strong>直接删除</strong>重复值，这是重复值处理的最主要的方法</p>
 <h2 id="缺失值处理"><a href="#缺失值处理" class="headerlink" title="缺失值处理"></a>缺失值处理</h2><h3 id="缺失值查看"><a href="#缺失值查看" class="headerlink" title="缺失值查看"></a>缺失值查看</h3><p>一个数据集中，我们可能会发现许多缺失值</p>
@@ -252,9 +258,15 @@
 <h2 id="异常值处理"><a href="#异常值处理" class="headerlink" title="异常值处理"></a>异常值处理</h2><p>首先我们可以根据常识进行判断，如年龄为负值等情况</p>
 <p>其次我们可以使用<strong>3σ原则</strong>，也就是平均数三个标准差以外的数据被视作异常值</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(data[<span class="string">&#x27;revenue&#x27;</span>]))</span><br><span class="line">error_revenue = <span class="number">3</span> * data[<span class="string">&#x27;revenue&#x27;</span>].std()</span><br><span class="line">data = data[(data[<span class="string">&#x27;revenue&#x27;</span>] &gt; data[<span class="string">&#x27;revenue&#x27;</span>].mean() - error_revenue) &amp; (data[<span class="string">&#x27;revenue&#x27;</span>] &lt; data[<span class="string">&#x27;revenue&#x27;</span>].mean() + error_revenue)]</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(data[<span class="string">&#x27;revenue&#x27;</span>]))</span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220319002046146.png" alt="image-20220319002046146" style="zoom:150%;" /></p>
-<p>这里我们删除了153条异常数据</p>
-<h2 id="字符数字化"><a href="#字符数字化" class="headerlink" title="字符数字化"></a>字符数字化</h2><h3 id="独热编码-one-hot-code"><a href="#独热编码-one-hot-code" class="headerlink" title="独热编码(one-hot code)"></a>独热编码(one-hot code)</h3>
+<h2 id="字符数字化"><a href="#字符数字化" class="headerlink" title="字符数字化"></a>字符数字化</h2><h3 id="独热编码-one-hot-code"><a href="#独热编码-one-hot-code" class="headerlink" title="独热编码(one-hot code)"></a>独热编码(one-hot code)</h3><p>将类别变量转化为0和1的形式</p>
+<p>以性别特征举例，有两种性别：Male和Female</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220403133344740.png" alt="image-20220403133344740"></p>
+<p>我们对该特征进行独热编码，将它转换成Gender_Male和Gender_Female两个特征，其中男性的Gender_Male特征值为1，Gender_Female特征值为0</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220403133617558.png" alt="image-20220403133617558"></p>
+<p>这时我们就实现了将字符数据转化成了数字</p>
+<p><strong>pandas</strong>提供了一个函数<code>pd.get_dummies()</code>可以实现独热编码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">data = pd.read_csv(<span class="string">&#x27;Data.csv&#x27;</span>)</span><br><span class="line">gender = pd.DataFrame(data[<span class="string">&#x27;Gender&#x27;</span>])</span><br><span class="line">gender = pd.get_dummies(gender, columns=[<span class="string">&#x27;Gender&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span>(gender.head())</span><br></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -334,7 +346,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">数据预处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E5%BD%92%E4%B8%80%E5%8C%96%E3%80%81%E6%A0%87%E5%87%86%E5%8C%96"><span class="nav-number">1.1.</span> <span class="nav-text">特征归一化、标准化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%8D%E5%80%BC%E5%A4%84%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">重复值处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E5%A4%B1%E5%80%BC%E5%A4%84%E7%90%86"><span class="nav-number">1.3.</span> <span class="nav-text">缺失值处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E5%A4%B1%E5%80%BC%E6%9F%A5%E7%9C%8B"><span class="nav-number">1.3.1.</span> <span class="nav-text">缺失值查看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E5%A4%B1%E5%80%BC%E5%A1%AB%E8%A1%A5"><span class="nav-number">1.3.2.</span> <span class="nav-text">缺失值填补</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%80%BC%E5%A4%84%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">异常值处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E6%95%B0%E5%AD%97%E5%8C%96"><span class="nav-number">1.5.</span> <span class="nav-text">字符数字化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8B%AC%E7%83%AD%E7%BC%96%E7%A0%81-one-hot-code"><span class="nav-number">1.5.1.</span> <span class="nav-text">独热编码(one-hot code)</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">数据预处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E6%94%BE%E7%BC%A9"><span class="nav-number">1.1.</span> <span class="nav-text">特征放缩</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%A4%8D%E5%80%BC%E5%A4%84%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">重复值处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E5%A4%B1%E5%80%BC%E5%A4%84%E7%90%86"><span class="nav-number">1.3.</span> <span class="nav-text">缺失值处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E5%A4%B1%E5%80%BC%E6%9F%A5%E7%9C%8B"><span class="nav-number">1.3.1.</span> <span class="nav-text">缺失值查看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E5%A4%B1%E5%80%BC%E5%A1%AB%E8%A1%A5"><span class="nav-number">1.3.2.</span> <span class="nav-text">缺失值填补</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E5%80%BC%E5%A4%84%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">异常值处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E6%95%B0%E5%AD%97%E5%8C%96"><span class="nav-number">1.5.</span> <span class="nav-text">字符数字化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8B%AC%E7%83%AD%E7%BC%96%E7%A0%81-one-hot-code"><span class="nav-number">1.5.1.</span> <span class="nav-text">独热编码(one-hot code)</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -348,14 +360,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -392,13 +404,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">106k</span>
+    <span title="站点总字数">118k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:36</span>
+    <span title="站点阅读时长">1:47</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>

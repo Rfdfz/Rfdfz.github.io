@@ -32,10 +32,12 @@
 <meta property="og:site_name" content="Please Lamp The Star">
 <meta property="og:description" content="逻辑回归模型属于监督学习中的分类问题">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:/Users/lcx/AppData/Roaming/Typora/typora-user-images/image-20220401163417598.png">
 <meta property="article:published_time" content="2022-03-27T08:55:03.000Z">
-<meta property="article:modified_time" content="2022-03-27T08:57:23.064Z">
+<meta property="article:modified_time" content="2022-04-01T12:04:12.461Z">
 <meta property="article:author" content="林程星">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/lcx/AppData/Roaming/Typora/typora-user-images/image-20220401163417598.png">
 
 <link rel="canonical" href="http://example.com/2022/03/27/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92-%E5%AE%9E%E8%B7%B5%E7%AF%87/">
 
@@ -182,10 +184,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-03-27 16:55:03 / 修改时间：16:57:23" itemprop="dateCreated datePublished" datetime="2022-03-27T16:55:03+08:00">2022-03-27</time>
+              <time title="创建时间：2022-03-27 16:55:03" itemprop="dateCreated datePublished" datetime="2022-03-27T16:55:03+08:00">2022-03-27</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-01 20:04:12" itemprop="dateModified" datetime="2022-04-01T20:04:12+08:00">2022-04-01</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -202,14 +210,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>319</span>
+              <span>2.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -224,10 +232,28 @@
         <p>逻辑回归模型属于监督学习中的分类问题</p>
 <span id="more"></span>
 <h1 id="逻辑回归-实践篇"><a href="#逻辑回归-实践篇" class="headerlink" title="逻辑回归-实践篇"></a>逻辑回归-实践篇</h1><h2 id="向量化"><a href="#向量化" class="headerlink" title="向量化"></a>向量化</h2><p>假设我们的数据集为<script type="math/tex">D={(x^{(1)},y^{(1)}),(x^{(2)},y^{(2)}),\cdots,(x^{(m)},y^{(m)})}</script></p>
-<p>其中的每一个样本向量为<script type="math/tex">x\in\begin{pmatrix}x_0\\x_1\\\cdots\\x_n\end{pmatrix}</script>，<script type="math/tex">x_0=1</script>，<script type="math/tex">y\in{0,1}</script></p>
+<p>其中的每一个样本向量为<script type="math/tex">x\in\begin{pmatrix}x_0\\x_1\\\cdots\\x_n\end{pmatrix}</script>，<script type="math/tex">x_0=1</script>，<script type="math/tex">y\in{0,1}</script>，<script type="math/tex">h_\theta(x)=\theta^Tx</script></p>
 <p>逻辑回归的<strong>代价函数</strong></p>
 <script type="math/tex; mode=display">
-\begin{align}J(\theta)&=-\frac{1}{m}[\sum^m_{i=1}y^{(i)}logh_\theta(x^{(i)})+(1-y^{(i)})log(1-h_\theta(x^{(i)}))]\\&=\end{align}</script>
+\begin{align}J(\theta)&=-\frac{1}{m}[\sum^m_{i=1}y^{(i)}logh_\theta(x^{(i)})+(1-y^{(i)})log(1-h_\theta(x^{(i)}))]\\&=-\frac{1}{m}\begin{pmatrix}y^{(1)}logh_\theta(x^{(1)})+(1-y^{(1)})log(1-h_\theta(x^{(1)})),y^{(2)}logh_\theta(x^{(2)})+(1-y^{(2)})log(1-h_\theta(x^{(2)})),\cdots ,y^{(m)}logh_\theta(x^{(m)})+(1-y^{(m)})log(1-h_\theta(x^{(m)}))\end{pmatrix}_{1\times m}\\&=-\frac{1}{m}(y^T*logh_\theta(x)+(1-y^T)*log(1-h_\theta(x)))\end{align}</script><p>逻辑回归的<strong>梯度下降表达式</strong></p>
+<script type="math/tex; mode=display">
+\begin{align}\theta_j&:=\theta_j-\frac{\alpha}{m}\frac{\partial}{\partial\theta_j}J(\theta)\end{align}</script><p>经过向量化处理后变为</p>
+<script type="math/tex; mode=display">
+\theta=\theta-\frac{\alpha}{m}*X^T(h_\theta(x)-y)</script><h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Sigmoid</span>(<span class="params">z</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> / (<span class="number">1</span> + np.exp(-z))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">CostFunction</span>(<span class="params">theta, train_X, train_Y</span>):</span></span><br><span class="line">    H = Sigmoid(theta.T.dot(train_X.T))</span><br><span class="line">    inner = train_Y.T * np.log(H) + (<span class="number">1</span> - train_Y.T) * np.log(<span class="number">1</span> - H)</span><br><span class="line">    <span class="keyword">return</span> -(np.<span class="built_in">sum</span>(inner) / <span class="built_in">len</span>(train_X))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">GradientDescent</span>(<span class="params">theta, train_X, train_Y, alpha, iters</span>):</span></span><br><span class="line">    costs = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(iters):</span><br><span class="line">        cost = CostFunction()</span><br><span class="line">        H = Sigmoid(theta.T.dot(train_X.T))</span><br><span class="line">        theta = theta - (alpha / <span class="built_in">len</span>(train_X)) * train_X.T.dot(H.T - train_Y)</span><br><span class="line">        costs.append(cost)</span><br><span class="line">    <span class="keyword">return</span> theta, costs</span><br></pre></td></tr></table></figure>
+<h2 id="模型评估"><a href="#模型评估" class="headerlink" title="模型评估"></a>模型评估</h2><h3 id="混淆矩阵"><a href="#混淆矩阵" class="headerlink" title="混淆矩阵"></a>混淆矩阵</h3><p><img src="C:/Users/lcx/AppData/Roaming/Typora/typora-user-images/image-20220401163417598.png" alt="image-20220401163417598" style="zoom:50%;" /></p>
+<p>上图就是混淆矩阵，其中TP(True Positive)、FN(False Negative)、FP(False Positive)、TN(True Negative)分别叫做真阳性、假阴性、假阳性、真阴性，这四个概念是评估一个分类器的重要参数。</p>
+<h3 id="精确率-precision-和召回率-Recall"><a href="#精确率-precision-和召回率-Recall" class="headerlink" title="精确率(precision)和召回率(Recall)"></a>精确率(precision)和召回率(Recall)</h3><p><strong>精确值</strong>为正确预测为正的占全部预测为正的比例</p>
+<p><strong>召回率</strong>为正确预测为正的占全部实际为正的比例</p>
+<p>公式如下：</p>
+<script type="math/tex; mode=display">
+\rm{Precision}=\frac{TP}{TP+FP}</script><script type="math/tex; mode=display">
+\rm{Recall}=\frac{TP}{TP+FN}</script><h3 id="ROC曲线与AUC值"><a href="#ROC曲线与AUC值" class="headerlink" title="ROC曲线与AUC值"></a>ROC曲线与AUC值</h3><p><strong>ROC曲线</strong>全名为<strong>接收者操作特征曲线</strong>，是反映敏感性和特异性连续变量的综合指标，ROC曲线上每个点反映着对同一信号刺激的感受性</p>
+<p>横坐标为FPR(False positive rate)，即伪正类率</p>
+<p>纵坐标为TPR(True positive rate)，即真正类率</p>
+<p>在一个分类模型中，针对每一个样本的预测值设定<strong>分类阈值</strong>，即当预测值大于该阈值时，预测结果为正类，从而每个样本可计算出FPR、TPR值，写成<script type="math/tex">(\rm{FPR},\rm{TPR})</script>的坐标形式则构成ROC曲线，而ROC曲线围成的面积即为AUC值，AUC值是评估一个分类器的标准之一</p>
+<p>代码实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_ROC</span>(<span class="params">test_X, test_Y</span>):</span></span><br><span class="line">    result = np.array([self.test_Y.flatten(), self.y_hat.flatten()]).T</span><br><span class="line">    result = pd.DataFrame(result, columns=[<span class="string">&#x27;y_real&#x27;</span>, <span class="string">&#x27;y_pre&#x27;</span>])</span><br><span class="line">    result = result.sort_values(by=<span class="string">&#x27;y_pre&#x27;</span>, ascending=<span class="literal">False</span>)</span><br><span class="line">    pos = np.<span class="built_in">sum</span>(result[<span class="string">&#x27;y_real&#x27;</span>] == <span class="number">1</span>)</span><br><span class="line">    neg = np.<span class="built_in">sum</span>(result[<span class="string">&#x27;y_real&#x27;</span>] == <span class="number">0</span>)</span><br><span class="line">    fpr = []</span><br><span class="line">    tpr = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(result[<span class="string">&#x27;y_pre&#x27;</span>])):</span><br><span class="line">    	tpr.append(np.<span class="built_in">sum</span>(result.iloc[:i][<span class="string">&#x27;y_real&#x27;</span>] == <span class="number">1</span>) / pos)</span><br><span class="line">        fpr.append(np.<span class="built_in">sum</span>(result.iloc[:i][<span class="string">&#x27;y_real&#x27;</span>] == <span class="number">0</span>) / neg)</span><br><span class="line">        lastx = <span class="number">0.</span></span><br><span class="line">        auc = <span class="number">0.</span></span><br><span class="line">    <span class="keyword">for</span> x, y <span class="keyword">in</span> <span class="built_in">zip</span>(fpr, tpr):</span><br><span class="line">        auc += (x - lastx) * y</span><br><span class="line">        lastx = x</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;AUC=<span class="subst">&#123;auc&#125;</span>&#x27;</span>)</span><br><span class="line">    plt.plot(fpr, tpr, <span class="string">&#x27;b&#x27;</span>)</span><br><span class="line">   	plt.xlabel(<span class="string">&#x27;FPR&#x27;</span>)</span><br><span class="line">   	plt.ylabel(<span class="string">&#x27;TPR&#x27;</span>)</span><br><span class="line">   	plt.show()</span><br><span class="line"><span class="keyword">return</span> auc</span><br></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -245,7 +271,10 @@
     <a href="/2022/03/24/%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92-%E7%90%86%E8%AE%BA%E7%AF%87/" rel="prev" title="逻辑回归-理论篇">
       <i class="fa fa-chevron-left"></i> 逻辑回归-理论篇
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/03/MySQL%E5%9F%BA%E7%A1%80/" rel="next" title="MySQL基础">
+      MySQL基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -304,7 +333,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92-%E5%AE%9E%E8%B7%B5%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">逻辑回归-实践篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E5%8C%96"><span class="nav-number">1.1.</span> <span class="nav-text">向量化</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92-%E5%AE%9E%E8%B7%B5%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">逻辑回归-实践篇</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E5%8C%96"><span class="nav-number">1.1.</span> <span class="nav-text">向量化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.2.</span> <span class="nav-text">代码实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0"><span class="nav-number">1.3.</span> <span class="nav-text">模型评估</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B7%E6%B7%86%E7%9F%A9%E9%98%B5"><span class="nav-number">1.3.1.</span> <span class="nav-text">混淆矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B2%BE%E7%A1%AE%E7%8E%87-precision-%E5%92%8C%E5%8F%AC%E5%9B%9E%E7%8E%87-Recall"><span class="nav-number">1.3.2.</span> <span class="nav-text">精确率(precision)和召回率(Recall)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROC%E6%9B%B2%E7%BA%BF%E4%B8%8EAUC%E5%80%BC"><span class="nav-number">1.3.3.</span> <span class="nav-text">ROC曲线与AUC值</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -318,14 +347,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -362,13 +391,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">106k</span>
+    <span title="站点总字数">118k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:36</span>
+    <span title="站点阅读时长">1:47</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
