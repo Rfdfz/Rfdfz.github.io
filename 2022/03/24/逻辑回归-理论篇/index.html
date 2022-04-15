@@ -36,14 +36,12 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220326110027265.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220326125330172.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220326125606223.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220326130551413.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220326131341173.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220327132910768.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220327133238958.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220327133659225.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220327143602281.png">
 <meta property="article:published_time" content="2022-03-24T08:49:15.000Z">
-<meta property="article:modified_time" content="2022-04-03T09:55:03.736Z">
+<meta property="article:modified_time" content="2022-04-09T08:40:33.224Z">
 <meta property="article:author" content="林程星">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220325205053832.png">
@@ -201,7 +199,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-03 17:55:03" itemprop="dateModified" datetime="2022-04-03T17:55:03+08:00">2022-04-03</time>
+                <time title="修改时间：2022-04-09 16:40:33" itemprop="dateModified" datetime="2022-04-09T16:40:33+08:00">2022-04-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -263,23 +261,18 @@ h_\theta(x)=\frac{1}{1+e^{-\theta^Tx}}</script><h3 id="假设函数输出值的�
 <p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220326125606223.png" alt="image-20220326125606223"></p>
 <p>对它使用梯度下降法，我们能保证获得全局最小值</p>
 <p>因此我们需要寻找一个新的代价函数，使得他是凸函数</p>
-<h3 id="逻辑回归的代价函数"><a href="#逻辑回归的代价函数" class="headerlink" title="逻辑回归的代价函数"></a>逻辑回归的代价函数</h3><p>我们将这个函数用于<strong>逻辑回归的代价函数</strong></p>
+<h3 id="逻辑回归的代价函数"><a href="#逻辑回归的代价函数" class="headerlink" title="逻辑回归的代价函数"></a>逻辑回归的代价函数</h3><p>我们将单个样本看作一个事件，那么事件<strong>发生</strong>的概率为</p>
 <script type="math/tex; mode=display">
-\begin{equation}\rm{Cost}(h_\theta(x),y)=\left\{\begin{aligned}-log(h_\theta(x)),y&=1\\-log(1-h_\theta(x)),y&=0\end{aligned}\right.\end{equation}</script><p>我们可以绘制出<script type="math/tex">y=1</script>情形下的图像</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220326130551413.png" alt="image-20220326130551413"></p>
-<p>我们由对数函数的性质可以知道：当<script type="math/tex">y=1,h_\theta(x)=1</script>时，<script type="math/tex">\rm{Cost}=0</script>；但当<script type="math/tex">y=1,h_\theta(x)\rightarrow 0</script>时，<script type="math/tex">\rm{Cost\rightarrow\infty}</script></p>
-<p>接着我们来看看<script type="math/tex">y=0</script>的情况</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220326131341173.png" alt="image-20220326131341173"></p>
-<p>同上我们可知：当<script type="math/tex">y=0,h_\theta(x)=0</script>时，<script type="math/tex">\rm{Cost}=0</script>；但当<script type="math/tex">y=0,h_\theta(x)\rightarrow1</script>时，<script type="math/tex">\rm{Cost}\rightarrow\infty</script>，这两条结论可以证明，我们所选的代价函数会给出一个凸函数。</p>
-<p>简化代价函数</p>
-<p>这是逻辑回归代价函数</p>
+\begin{equation}P(y|x)=\left\{\begin{aligned}h_\theta(x),y=1\\1-h_\theta(x),y=0\end{aligned}\right.\end{equation}</script><p>我们把上述式子用一个式子来表示，可表示为</p>
 <script type="math/tex; mode=display">
-J(\theta)=\frac{1}{m}\sum^m_{i=1}\rm{Cost}(h_\theta(x^{(i)},y^{(i)}))\\
-\begin{equation}\rm{Cost}(h_\theta(x),y)=\left\{\begin{aligned}-log(h_\theta(x)),y&=1\\-log(1-h_\theta(x)),y&=0\end{aligned}\right.\end{equation}</script><p>我们注意到，<script type="math/tex">\rm{Cost}()</script>函数总是被分成<script type="math/tex">y=1</script>和<script type="math/tex">y=0</script>两种情况来写，我们要用一种方法将这两个式子合成一个等式，即</p>
+P(y_i|x_i)=h_\theta(x_i)^{y_i}(1-h_\theta(x_i))^{1-y_i}</script><p>这时候，我们将<strong>一个</strong>样本的情况扩展成<strong>m个</strong>样本的情况，那么合事件发生的概率即为全部样本事件发生概率的<strong>乘积</strong></p>
 <script type="math/tex; mode=display">
-\rm{Cost}(h_\theta(x),y)=-ylog(h_\theta(x))-(1-y)log(1-h_\theta(x))</script><p>这样我们就可以写出完整的逻辑回归代价函数</p>
+\begin{aligned}P_总&=P(y_1|x_1)P(y_2|x_2)P(y_3|x_3)\cdots P(y_m|x_m)\\&=\prod_{i=1}^mh_\theta(x_i)^{y_i}(1-h_\theta(x_i))^{1-y_i}\end{aligned}</script><p>这个连乘式看起来过于复杂，因此我们在两边同时取对数，将乘法变成加法</p>
 <script type="math/tex; mode=display">
-\begin{align}J(\theta)&=\frac{1}{m}\sum^m_{i=1}\rm{Cost}(h_\theta(x^{(i)}),y^{(i)})\\&=-\frac{1}{m}[\sum^m_{i=1}y^{(i)}logh_\theta(x^{(i)})+(1-y^{(i)})log(1-h_\theta(x^{(i)}))]\end{align}</script><h2 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h2><p><strong>代价函数</strong></p>
+\begin{aligned}logP_总&=log(\prod_{i=1}^mh_\theta(x_i)^{y_i}(1-h_\theta(x_i))^{1-y_i})\\&=\sum_{i=1}^mlog(h_\theta(x_i)^{y_i}(1-h_\theta(x_i))^{1-y_i})\\&=\sum^m_{i=1}(y_ilogh_\theta(x_i)+(1-y_i)log(1-h_\theta(x_i)))\end{aligned}</script><p>代价函数是衡量我们模型输出结果和实际输出结果之间的差距的函数，因此我们希望它越小越好，而上式的值代表合事件发生概率，我们希望它越大越好，所以我们若想把上式作为代价函数，我们要取其相反数，再除以样本数m，即</p>
+<script type="math/tex; mode=display">
+\begin{aligned}J(\theta)&=\frac{1}{m}\cdot -logP_总\\&=\frac{1}{m}\sum^m_{i=1}(-y_ilogh_\theta(x_i)-(1-y_i)log(1-h_\theta(x_i)))\end{aligned}</script><p>这就是逻辑回归的代价函数，又被称为<strong>交叉熵代价函数</strong></p>
+<h2 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h2><p><strong>代价函数</strong></p>
 <script type="math/tex; mode=display">
 \begin{align}J(\theta)=-\frac{1}{m}[\sum^m_{i=1}y^{(i)}logh_\theta(x^{(i)})+(1-y^{(i)})log(1-h_\theta(x^{(i)}))]\end{align}</script><p>我们要找到这个函数的最小值，我们使用<strong>梯度下降法</strong>，更新规则如下</p>
 <script type="math/tex; mode=display">
@@ -393,7 +386,7 @@ J(\theta)=\frac{1}{m}\sum^m_{i=1}\rm{Cost}(h_\theta(x^{(i)},y^{(i)}))\\
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -437,13 +430,13 @@ J(\theta)=\frac{1}{m}\sum^m_{i=1}\rm{Cost}(h_\theta(x^{(i)},y^{(i)}))\\
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">118k</span>
+    <span title="站点总字数">124k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:47</span>
+    <span title="站点阅读时长">1:52</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
