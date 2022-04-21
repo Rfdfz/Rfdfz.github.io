@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icons8-pixel-star-96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icons8-pixel-star-48.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+  <meta name="description" content="人工神经网络是生物神经网络在某种简化意义下的技术复现，作为一门学科，它的主要任务是根据生物神经网络的原理和实际应用的需要建造实用的人工神经网络模型，设计相应的学习算法，模拟人脑的某种智能活动，然后在技术上实现出来用以解决实际问题。因此，生物神经网络主要研究智能的机理；人工神经网络主要研究智能机理的实现，两者相辅相成。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BP神经网络-理论篇">
+<meta property="og:url" content="http://example.com/2022/04/16/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E7%90%86%E8%AE%BA%E7%AF%87/index.html">
+<meta property="og:site_name" content="Please Lamp The Star">
+<meta property="og:description" content="人工神经网络是生物神经网络在某种简化意义下的技术复现，作为一门学科，它的主要任务是根据生物神经网络的原理和实际应用的需要建造实用的人工神经网络模型，设计相应的学习算法，模拟人脑的某种智能活动，然后在技术上实现出来用以解决实际问题。因此，生物神经网络主要研究智能的机理；人工神经网络主要研究智能机理的实现，两者相辅相成。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220416093529144.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/c4854a8775e33cdf080ef9839ab485a.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/5a097d55a352cd0124b9d6e7a8f621e.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220416103645072.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/ab49c25c4efbf8e49005815d15a465c.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/023e2b885a4d42bfecbf158cf8f9cd2.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/2ccd014acad12b52881341f0e6d38d6.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220416214015276.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/1ee8b21a0ad43a51f0a54dc1358b9c4.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220418164643085.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220418170126583.png">
+<meta property="article:published_time" content="2022-04-16T01:25:02.000Z">
+<meta property="article:modified_time" content="2022-04-20T12:50:42.359Z">
+<meta property="article:author" content="林程星">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220416093529144.png">
+
+<link rel="canonical" href="http://example.com/2022/04/16/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E7%90%86%E8%AE%BA%E7%AF%87/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>BP神经网络-理论篇 | Please Lamp The Star</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Please Lamp The Star</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/16/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E7%90%86%E8%AE%BA%E7%AF%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="林程星">
+      <meta itemprop="description" content="‘绳’和‘棒’一样，是人类最早创造的工具之一。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Please Lamp The Star">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          BP神经网络-理论篇
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-16 09:25:02" itemprop="dateCreated datePublished" datetime="2022-04-16T09:25:02+08:00">2022-04-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-20 20:50:42" itemprop="dateModified" datetime="2022-04-20T20:50:42+08:00">2022-04-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>人工神经网络是生物神经网络在某种简化意义下的技术复现，作为一门学科，它的主要任务是根据生物神经网络的原理和实际应用的需要建造实用的人工神经网络模型，设计相应的学习算法，模拟人脑的某种智能活动，然后在技术上实现出来用以解决实际问题。因此，生物神经网络主要研究智能的机理；人工神经网络主要研究智能机理的实现，两者相辅相成。</p>
+<span id="more"></span>
+<h1 id="简述神经网络"><a href="#简述神经网络" class="headerlink" title="简述神经网络"></a>简述神经网络</h1><h2 id="神经元模型"><a href="#神经元模型" class="headerlink" title="神经元模型"></a>神经元模型</h2><p>1943年，Mcculloch and Pitts将生物神经网络中的神经元抽象成简单的模型，这就是一直沿用至今的“M-P神经元模型”</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220416093529144.png" alt="image-20220416093529144" style="zoom:67%;" /></p>
+<p>在这个模型中，神经元接收到n个其他神经元传递过来的输入信号，这些输入信号通过不同的参数（权重）进行传递，神经元将接收到的总输入值与神经元的偏置值（阈值）进行比较，然后通过<strong>激活函数(activation function)</strong>处理以产生神经元的输出</p>
+<h2 id="为什么要使用激活函数？"><a href="#为什么要使用激活函数？" class="headerlink" title="为什么要使用激活函数？"></a>为什么要使用激活函数？</h2><p><strong>激活函数的主要作用是完成对数据的非线性变换</strong>，增强网络的学习能力</p>
+<p>和表达能力，使得输入输出可在非线性的任意复杂函数映射</p>
+<p>我们用一个简单的神经网络来举例</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/c4854a8775e33cdf080ef9839ab485a.jpg" alt="c4854a8775e33cdf080ef9839ab485a" style="zoom: 33%;" /></p>
+<p>我们先不使用<strong>激活函数</strong></p>
+<script type="math/tex; mode=display">
+\begin{align}
+&a_1=\theta_0^{(1)}+\theta_{11}^{(1)}x_1+\theta_{12}^{(1)}x_2+\theta_{13}^{(1)}x_3\\
+&a_2=\theta_0^{(1)}+\theta_{21}^{(1)}x_1+\theta_{22}^{(1)}x_2+\theta_{23}^{(1)}x_3\\
+\end{align}</script><script type="math/tex; mode=display">
+\begin{aligned}
+h_\theta(x)&=\theta_1^{(2)}a_1+\theta_2^{(2)}a_2\\
+&=(\theta_1^{(2)}\theta_{11}^{(1)}+\theta_2^{(2)}\theta_{21}^{(1)})x_1+(\theta_1^{(2)}\theta_{12}^{(1)}+\theta_2^{(2)}\theta_{22}^{(1)})x_2+(\theta_1^{(2)}\theta_{13}^{(1)}+\theta_2^{(2)}\theta_{23}^{(1)})x_3+\theta_0^{(1)}(\theta_1^{(2)}+\theta_2^{(2)})
+\end{aligned}</script><p>我们可以发现，若不使用激活函数，无论神经网络有多少层，输出值永远是线性的，这限制了神经网络的能力</p>
+<h2 id="激活函数的选择"><a href="#激活函数的选择" class="headerlink" title="激活函数的选择"></a>激活函数的选择</h2><p>理想情况下的激活函数应该是<strong>阶跃函数</strong>，它将输入值映射为输出值0或1，其中0对应神经元抑制，1对应神经元兴奋。然而，阶跃函数它不连续也不光滑，无法对其进行求导，因此实际上我们常用<strong>Sigmoid函数</strong>作为激活函数</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/5a097d55a352cd0124b9d6e7a8f621e.jpg" alt="5a097d55a352cd0124b9d6e7a8f621e"></p>
+<h2 id="感知机"><a href="#感知机" class="headerlink" title="感知机"></a>感知机</h2><p><strong>感知机(Perceptron)</strong>由两层神经元组成，如下图所示，输入层接收外界输入信号后传递给输出层</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220416103645072.png" alt="image-20220416103645072" style="zoom: 67%;" /></p>
+<p>感知机能够轻易地实现逻辑与、或、非运算</p>
+<p>我们来实现逻辑与运算，假设我们已经训练出了该模型的参数，<script type="math/tex">h_\theta(x)=g(-30+20x_1+20x_2)</script>，其中g(z)为Sigmoid函数，由此我们可以画出真值表</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/ab49c25c4efbf8e49005815d15a465c.jpg" alt="ab49c25c4efbf8e49005815d15a465c" style="zoom: 33%;" /></p>
+<p>这样我们就成功的获得了计算逻辑与的模型。然而，上述三种问题都是线性可分问题，他们都可以通过一个线性超平面将他们分开，感知机无法解决非线性可分问题，例如逻辑异或的运算</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/023e2b885a4d42bfecbf158cf8f9cd2.jpg" alt="023e2b885a4d42bfecbf158cf8f9cd2" style="zoom: 67%;" /></p>
+<p>要解决非线性可分问题，我们需要考虑使用多层功能神经元，即使用两层感知机来解决异或问题，输入层与输出层之间的一层神经元被称作隐藏层，<strong>隐藏层和输出层神经元都是拥有激活函数的功能神经元</strong></p>
+<h2 id="多层神经网络"><a href="#多层神经网络" class="headerlink" title="多层神经网络"></a>多层神经网络</h2><p>更一般的，常见的神经网络是形如下图的结构，每层神经元都与下一层神经元<strong>全互连</strong>，<strong>神经元之间不存在同层链接，也不存在跨层链接</strong>，这样的神经网络结构通常称为<strong>“多层前馈神经网络”(multi-layer feedforward neural networks)</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/2ccd014acad12b52881341f0e6d38d6.jpg" alt="2ccd014acad12b52881341f0e6d38d6"></p>
+<p>神经网络的学习过程，就是根据训练数据来调整神经元之间的参数；换言之，神经网络学到的东西，全部蕴含在参数中</p>
+<h1 id="反向传播算法"><a href="#反向传播算法" class="headerlink" title="反向传播算法"></a>反向传播算法</h1><p>假设我们的数据集为</p>
+<script type="math/tex; mode=display">D={(x^{(1)},y^{(1)}),(x^{(2)},y^{(2)}),\cdots,(x^{(m)},y^{(m)})}</script><script type="math/tex; mode=display">L=$$神经网络的层数
+
+$$s_l=$$神经网络第L层的的神经元数量（不包括偏置单元）
+
+本文中我们将讨论两种分类问题，第一种是二分类问题，第二种是多元分类问题
+
+- 二分类问题
+
+  标签 $$y=0\ or\ 1</script><p>  预测值 <script type="math/tex">h_\theta(x)\in \R</script></p>
+<ul>
+<li><p>多元分类问题</p>
+<p>标签 <script type="math/tex">y\in \R^K</script></p>
+<p>预测值 <script type="math/tex">h_\theta(x)\in \R^K</script></p>
+</li>
+</ul>
+<h2 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h2><p>神经网络的代价函数是逻辑回归代价函数的一般形式，即我们不在只有一个逻辑回归的输出单元，而有K个</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+J(\Theta)=&-\frac{1}{m}\left[\sum^m_{i=1}\sum^K_{k=1}(y_k^{(i)}log(h_\Theta(x^{(i)}))_k+(1-y_k^{(i)})log(1-h_\Theta(x^{(i)}))_k)\right]\\&+\frac{\lambda}{2m}\sum^{L-1}_{l=1}\sum^{s_l}_{i=1}\sum^{s_l+1}_{j=1}(\Theta_{ji}^{(l)})^2
+\end{aligned}</script><h2 id="偏导项计算"><a href="#偏导项计算" class="headerlink" title="偏导项计算"></a>偏导项计算</h2><p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220416214015276.png" alt="image-20220416214015276"></p>
+<p>对于上图，我们先引入一个误差项<script type="math/tex">\delta^{(4)}=a^{(4)}-y</script>，其中的<script type="math/tex">a^{(4)}=\begin{pmatrix}a_1^{(4)}\\a_2^{(4)}\\a_3^{(4)}\\a_4^{(4)}\end{pmatrix}</script>，<script type="math/tex">y=\begin{pmatrix}y_1\\y_2\\y_3\\y_4\end{pmatrix}</script>，这里经过一系列推导，可以得出以下式子，详细推导见<a href="###误差项的推导">此处</a></p>
+<script type="math/tex; mode=display">
+\begin{align}
+    \delta^{(4)}&=a^{(4)}-y\\
+    \delta^{(3)}&=(\Theta^{(3)})^T\delta^{(4)}\circ g'(z^{(3)})\\
+    \delta^{(2)}&=(\Theta^{(2)})^T\delta^{(3)}\circ g'(z^{(2)})\\
+    \frac{\partial J}{\partial\Theta^{(l)}}&=\delta^{(l+1)}(a^{(l)})^T
+\end{align}</script><p>需要注意的是，上述式子都是忽略掉了代价函数中的正则项的</p>
+<h2 id="误差项的推导"><a href="#误差项的推导" class="headerlink" title="误差项的推导"></a>误差项的推导</h2><p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/1ee8b21a0ad43a51f0a54dc1358b9c4.jpg" alt="1ee8b21a0ad43a51f0a54dc1358b9c4" style="zoom: 33%;" /></p>
+<h2 id="反向传播算法-1"><a href="#反向传播算法-1" class="headerlink" title="反向传播算法"></a>反向传播算法</h2><p>对于训练集<script type="math/tex">D={(x^{(1)},y^{(1)}),(x^{(2)},y^{(2)}),\cdots,(x^{(m)},y^{(m)})}</script></p>
+<p>我们假设<script type="math/tex">\Delta_{ij}^{(l)}=0</script>（用于计算<script type="math/tex">\frac{\partial}{\partial\Theta_{ij}^{(l)}}J(\Theta)</script>）</p>
+<p>伪代码如下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220418164643085.png" alt="image-20220418164643085"></p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    D_{ij}^{(l)}&:=\frac{1}{m}\Delta_{ij}^{(l)}+\lambda\Theta_{ij}^{(l)}&j\ne0\\
+    D_{ij}^{(l)}&:=\frac{1}{m}\Delta_{ij}^{(l)}&j=0\\
+\end{aligned}</script><script type="math/tex; mode=display">
+\frac{\partial}{\partial\Theta_{ij}^{(l)}}J(\Theta)=D_{ij}^{(l)}</script><p>我们对矩阵<script type="math/tex">D^{(l)}</script>进行向量展开得到<script type="math/tex">\rm{Dvec}</script></p>
+<h2 id="梯度检测"><a href="#梯度检测" class="headerlink" title="梯度检测"></a>梯度检测</h2><p>在反向传播算法中有许多细节，因此当它与优化算法一同工作时，看起来能够正常运行，但它实际上存在一些BUG，因此我们运用梯度检测的思想，来检测反向传播算法在梯度下降或类梯度下降时是否正确运行</p>
+<p>我们先举一个简单的例子来说明梯度检测</p>
+<p><img src="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220418170126583.png" alt="image-20220418170126583"></p>
+<p>如上图，由导数的定义，我们可知，当<script type="math/tex">\epsilon</script>很小时</p>
+<script type="math/tex; mode=display">
+\rm{gradApprox}=\frac{d}{d\theta}J(\theta) \approx \frac{J(\theta+\epsilon)-J(\theta-\epsilon)}{2\epsilon}</script><p>接下来我们来考虑</p>
+<script type="math/tex; mode=display">
+\begin{align}
+    &\theta\in\R^n\\
+    &\theta=\begin{pmatrix}\theta_1\ \theta_2\ \cdots\         \theta_n\end{pmatrix}\\
+    &\frac{\partial}{\partial\theta_1}J(\theta)\approx\frac{J(\theta_1+\epsilon,\theta_2,\theta_3,\cdots,\theta_n)-J(\theta_1-\epsilon,\theta_2,\theta_3,\cdots,\theta_n)}{2\epsilon}\\
+    &\frac{\partial}{\partial\theta_2}J(\theta)\approx\frac{J(\theta_1,\theta_2+\epsilon,\theta_3,\cdots,\theta_n)-J(\theta_1,\theta_2-\epsilon,\theta_3,\cdots,\theta_n)}{2\epsilon}\\
+    &\frac{\partial}{\partial\theta_n}J(\theta)\approx\frac{J(\theta_1,\theta_2,\theta_3,\cdots,\theta_n+\epsilon)-J(\theta_1,\theta_2,\theta_3,\cdots,\theta_n-\epsilon)}{2\epsilon}
+\end{align}</script><p>由上式我们可以求出</p>
+<script type="math/tex; mode=display">
+\rm{gradApprox}=
+    \begin{pmatrix}
+        \frac{\partial}{\partial\theta_1}J(\theta)\\
+        \frac{\partial}{\partial\theta_2}J(\theta)\\
+        \vdots\\
+        \frac{\partial}{\partial\theta_n}J(\theta)
+    \end{pmatrix}</script><p>最后我们只需要判断</p>
+<script type="math/tex; mode=display">
+\rm{gradApprox}\approx\rm{DVec}</script><p>注意，在正式训练模型的时候要将梯度检测代码停用，因为梯度检测的速度非常慢</p>
+<h2 id="随机初始化"><a href="#随机初始化" class="headerlink" title="随机初始化"></a>随机初始化</h2><p>在之前的梯度下降中，我们将模型参数的初始值全部初始化为0，然而在神经网络中，相同的权重会导致第二层的隐藏神经元的值全部相同，这就导致了超过两个以上的隐藏神经元失去了作用，因此我们需要进行随机初始化</p>
+<p>-</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/09/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/" rel="prev" title="特征工程">
+      <i class="fa fa-chevron-left"></i> 特征工程
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/04/18/Python-PyMySQL/" rel="next" title="Python-PyMySQL">
+      Python-PyMySQL <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">1.</span> <span class="nav-text">简述神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A5%9E%E7%BB%8F%E5%85%83%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">神经元模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%EF%BC%9F"><span class="nav-number">1.2.</span> <span class="nav-text">为什么要使用激活函数？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">1.3.</span> <span class="nav-text">激活函数的选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%84%9F%E7%9F%A5%E6%9C%BA"><span class="nav-number">1.4.</span> <span class="nav-text">感知机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">1.5.</span> <span class="nav-text">多层神经网络</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">反向传播算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E4%BB%B7%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">代价函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%8F%E5%AF%BC%E9%A1%B9%E8%AE%A1%E7%AE%97"><span class="nav-number">2.2.</span> <span class="nav-text">偏导项计算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AF%E5%B7%AE%E9%A1%B9%E7%9A%84%E6%8E%A8%E5%AF%BC"><span class="nav-number">2.3.</span> <span class="nav-text">误差项的推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95-1"><span class="nav-number">2.4.</span> <span class="nav-text">反向传播算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E6%A3%80%E6%B5%8B"><span class="nav-number">2.5.</span> <span class="nav-text">梯度检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.6.</span> <span class="nav-text">随机初始化</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">林程星</p>
+  <div class="site-description" itemprop="description">‘绳’和‘棒’一样，是人类最早创造的工具之一。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">林程星</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">128k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:57</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
