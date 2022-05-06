@@ -27,8 +27,8 @@
 
   <meta name="description" content="人工神经网络是生物神经网络在某种简化意义下的技术复现，作为一门学科，它的主要任务是根据生物神经网络的原理和实际应用的需要建造实用的人工神经网络模型，设计相应的学习算法，模拟人脑的某种智能活动，然后在技术上实现出来用以解决实际问题。因此，生物神经网络主要研究智能的机理；人工神经网络主要研究智能机理的实现，两者相辅相成。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="BP神经网络-理论篇">
-<meta property="og:url" content="http://example.com/2022/04/16/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E7%90%86%E8%AE%BA%E7%AF%87/index.html">
+<meta property="og:title" content="BP神经网络">
+<meta property="og:url" content="http://example.com/2022/04/16/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html">
 <meta property="og:site_name" content="Please Lamp The Star">
 <meta property="og:description" content="人工神经网络是生物神经网络在某种简化意义下的技术复现，作为一门学科，它的主要任务是根据生物神经网络的原理和实际应用的需要建造实用的人工神经网络模型，设计相应的学习算法，模拟人脑的某种智能活动，然后在技术上实现出来用以解决实际问题。因此，生物神经网络主要研究智能的机理；人工神经网络主要研究智能机理的实现，两者相辅相成。">
 <meta property="og:locale" content="zh_CN">
@@ -44,12 +44,12 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220418164643085.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220418170126583.png">
 <meta property="article:published_time" content="2022-04-16T01:25:02.000Z">
-<meta property="article:modified_time" content="2022-04-22T08:10:10.781Z">
+<meta property="article:modified_time" content="2022-04-28T09:01:47.090Z">
 <meta property="article:author" content="林程星">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Rfdfz/image/image-20220416093529144.png">
 
-<link rel="canonical" href="http://example.com/2022/04/16/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E7%90%86%E8%AE%BA%E7%AF%87/">
+<link rel="canonical" href="http://example.com/2022/04/16/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
 
 
 <script id="page-configurations">
@@ -62,7 +62,7 @@
   };
 </script>
 
-  <title>BP神经网络-理论篇 | Please Lamp The Star</title>
+  <title>BP神经网络 | Please Lamp The Star</title>
   
 
 
@@ -172,7 +172,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/16/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E7%90%86%E8%AE%BA%E7%AF%87/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/16/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -185,7 +185,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          BP神经网络-理论篇
+          BP神经网络
         </h1>
 
         <div class="post-meta">
@@ -202,7 +202,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-22 16:10:10" itemprop="dateModified" datetime="2022-04-22T16:10:10+08:00">2022-04-22</time>
+                <time title="修改时间：2022-04-28 17:01:47" itemprop="dateModified" datetime="2022-04-28T17:01:47+08:00">2022-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -337,7 +337,6 @@ J(\Theta)=&-\frac{1}{m}\left[\sum^m_{i=1}\sum^K_{k=1}(y_k^{(i)}log(h_\Theta(x^{(
 <script type="math/tex; mode=display">
 \rm{gradApprox}\approx\rm{DVec}</script><p>注意，在正式训练模型的时候要将梯度检测代码停用，因为梯度检测的速度非常慢</p>
 <h2 id="随机初始化"><a href="#随机初始化" class="headerlink" title="随机初始化"></a>随机初始化</h2><p>在之前的梯度下降中，我们将模型参数的初始值全部初始化为0，然而在神经网络中，相同的权重会导致第二层的隐藏神经元的值全部相同，这就导致了超过两个以上的隐藏神经元失去了作用，因此我们需要进行随机初始化</p>
-<p>-</p>
 
     </div>
 
@@ -432,7 +431,7 @@ J(\Theta)=&-\frac{1}{m}\left[\sum^m_{i=1}\sum^K_{k=1}(y_k^{(i)}log(h_\Theta(x^{(
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -476,13 +475,13 @@ J(\Theta)=&-\frac{1}{m}\left[\sum^m_{i=1}\sum^K_{k=1}(y_k^{(i)}log(h_\Theta(x^{(
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">128k</span>
+    <span title="站点总字数">138k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:57</span>
+    <span title="站点阅读时长">2:05</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
